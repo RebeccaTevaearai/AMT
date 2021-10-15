@@ -10,6 +10,12 @@
 ### Connexion ssh
 `ssh [userName]@localhost -p 23 -i "[pathToApplicationServerSshKey.pem]"`
 
+## Interface web
+**Application**
+localhost:8081
+**Console d'administration**
+localhost:4849
+
 ## Installation 
 
 ## License
