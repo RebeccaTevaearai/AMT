@@ -28,4 +28,4 @@ localhost:4849
 
 ## MCD
 
-![](\images\MCD.png)
+![](images\MCD.png)
