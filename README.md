@@ -14,19 +14,18 @@
 
 </br>
 
-## Interface web
-**Application**
-localhost:8080
-**Console d'administration**
-Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml`
-- Décommenter les rôles du manager
-- Aouter un mot de passe pour chaque rôle
+## Interface web </br>
+**Application**  </br>
+localhost:8080  </br></br>
+**Console d'administration** </br>
+localhost:8080/manager/html </br></br>
+Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` </br>
+- Décommenter les rôles du manager </br>
+- Aouter un mot de passe pour chaque rôle </br>
 ````xml
   <user username="admin" password="admin" roles="manager-gui"/>
   <user username="robot" password="robot" roles="manager-script"/>
 ````
-localhost:8080/manager/html
-
 </br>
 
 ## Installation 
