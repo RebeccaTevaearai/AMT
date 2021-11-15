@@ -16,9 +16,16 @@
 
 ## Interface web
 **Application**
-localhost:8081
+localhost:8080
 **Console d'administration**
-localhost:4849
+Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml`
+- Décommenter les rôles du manager
+- Aouter un mot de passe pour chaque rôle
+````xml
+  <user username="admin" password="admin" roles="manager-gui"/>
+  <user username="robot" password="robot" roles="manager-script"/>
+````
+localhost:8080/manager/html
 
 </br>
 
