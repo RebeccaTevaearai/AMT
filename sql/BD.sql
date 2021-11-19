@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS `pecheur`;
+CREATE DATABASE `pecheur`;
+
+USE `pecheur`;
+
 CREATE TABLE Account(
    id INT AUTO_INCREMENT,
    role VARCHAR(50),
