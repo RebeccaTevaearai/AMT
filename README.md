@@ -15,10 +15,14 @@
 </br>
 
 ## Interface web </br>
+### Serveur d'application <br/>
+Tomcat v9
+
 **Application**  </br>
-localhost:8080  </br></br>
+localhost:8081  </br></br>
 **Console d'administration** </br>
-localhost:8080/manager/html </br></br>
+localhost:8081/manager/html </br>
+Login: admin:admin </br></br>
 Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` </br>
 - Décommenter les rôles du manager </br>
 - Aouter un mot de passe pour chaque rôle </br>
