@@ -15,8 +15,6 @@
 </br>
 
 ## Interface web </br>
-### Serveur d'application <br/>
-Tomcat v9
 
 **Application**  </br>
 localhost:8081  </br></br>
@@ -32,7 +30,8 @@ Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` <
 ````
 </br>
 
-## Installation 
-
+## Installation <br/>
+### Serveur d'application <br/>
+Tomcat v9
 
 
