@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "articleServlet", value = "/article")
+@WebServlet(name = "articleServlet", value = "")
 public class ArticleController extends HttpServlet {
 
     @Override

@@ -28,5 +28,10 @@ public class ArticleModel {
         return article;
     }
 
+    public Article getArticleById(Long id){
+
+        return new Article();
+    }
+
 
 }
