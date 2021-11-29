@@ -1,7 +1,6 @@
 # AMT
 
 ## Backlog
-[https://nicolas-glassey.gitbook.io/amt-backlog/](https://nicolas-glassey.gitbook.io/amt-backlog/) <br/>
 https://cloud.icescrum.com/p/PECHEUR/#/backlog/all/story/
 
 <br/>
@@ -18,6 +17,9 @@ https://cloud.icescrum.com/p/PECHEUR/#/backlog/all/story/
 ## Developpement local
 ### Serveur d'application
 Tomcat v9 (https://tomcat.apache.org/download-90.cgi)
+
+**Integration avec IntelliJ**
+https://www.jetbrains.com/help/idea/configuring-and-managing-application-server-integration.html
 
 **Configuration de la onsole d'administration**
 Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` </br>
