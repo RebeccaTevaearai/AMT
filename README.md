@@ -21,7 +21,7 @@ Tomcat v9 (https://tomcat.apache.org/download-90.cgi)
 **Integration avec IntelliJ**
 https://www.jetbrains.com/help/idea/configuring-and-managing-application-server-integration.html
 
-**Configuration de la onsole d'administration**
+**Configuration de la console d'administration**
 Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` </br>
 - Décommenter les rôles du manager </br>
 - Aouter un mot de passe pour chaque rôle </br>
