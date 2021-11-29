@@ -14,16 +14,25 @@
 
 </br>
 
-## Interface web
-**Application**
-localhost:8081
-**Console d'administration**
-localhost:4849
+## Interface web </br>
 
+**Application**  </br>
+localhost:8081  </br></br>
+**Console d'administration** </br>
+localhost:8081/manager/html </br>
+Login: admin:admin </br></br>
+Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` </br>
+- Décommenter les rôles du manager </br>
+- Aouter un mot de passe pour chaque rôle </br>
+````xml
+  <user username="admin" password="admin" roles="manager-gui"/>
+  <user username="robot" password="robot" roles="manager-script"/>
+````
 </br>
 
-## Installation 
-
+## Installation <br/>
+### Serveur d'application <br/>
+Tomcat v9 (https://tomcat.apache.org/download-90.cgi)
 
 
 ## MCD
