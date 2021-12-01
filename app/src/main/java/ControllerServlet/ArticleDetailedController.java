@@ -8,11 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "articleDetailedServlet", value = "/article",
-        initParams = {
-            @WebInitParam(name = "id", value = "1"),
-        }
-)
+@WebServlet(name = "articleDetailedServlet", urlPatterns = "/article/*")
 public class ArticleDetailedController extends HttpServlet {
 
     @Override
@@ -22,9 +18,8 @@ public class ArticleDetailedController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        Integer id = Integer.getInteger(getInitParameter("id"));
-
+        String stringId = req.getPathInfo().replace("/","");
+        Integer id = Integer.parseInt(stringId);
         req.setAttribute("id",id);
         req.getRequestDispatcher("jsps/detailed.jsp").forward(req,resp);
     }
