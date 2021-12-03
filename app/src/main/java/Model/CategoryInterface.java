@@ -2,7 +2,7 @@ package Model;
 
 import Data.Category;
 
-public interface CatergoryInterface {
+public interface CategoryInterface {
     /***
      * @return toutes les categories
      */
