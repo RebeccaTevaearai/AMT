@@ -13,11 +13,13 @@
     <div class="cl">&nbsp;</div>
     <!-- Content -->
     <div id="content">
+        <div class="product-detail">
+        <% if(article != null){ %>
         <h1><%= article.getName()%> </h1>
         <ul>
-            <%if(article.getCategories().isEmpty())%>
+            <%if(article.getCategories().isEmpty()){%>
             <%= "<li>Aucune</li>" %>
-            <%for (Category category : article.getCategories())
+            <%}for (Category category : article.getCategories())
             {%>
             <li>
                 <p><%=category.getName()%></p>
@@ -28,15 +30,19 @@
         <p>Quantité réstante : <%=article.getQuantity()%> </p>
         <p><%= article.getDescription()%></p>
         <ul>
-            <%if(article.getImages().isEmpty())%>
+            <%if(article.getImages().isEmpty()){%>
             <%= "<li><img src=\"css/images/default.png\" /></li>" %>
-            <%for (Image image : article.getImages())
+            <%}for (Image image : article.getImages())
                 {%>
                 <li>
                     <img src="css/images<%=image.getPath()%>" />
                 </li>
             <%}%>
         </ul>
+        <%}else {%>
+        <%="L'article recherché n'existe pas"%>
+        <% }%>
+        </div>
     </div>
 </div>
 

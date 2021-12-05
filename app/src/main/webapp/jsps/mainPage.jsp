@@ -25,12 +25,12 @@
         <ul>
 
           <% ArrayList<Article> articles = (ArrayList<Article>) request.getAttribute("articles");%>
-          <% if (articles.isEmpty())%>
+          <% if (articles.isEmpty()){%>
           <%= "Aucun article trouvé"%>
-          <% for(Article article : articles){ %>
+          <% }for(Article article : articles){ %>
 
 
-          <li><a href="/article/<%= article.getId() %>">
+          <li><a href="<%=application.getContextPath() %>/article?id=<%= article.getId() %>">
             <img src="css/images<% if(!article.getImages().isEmpty()){ %><%=article.getImages().get(0).getPath()%><% }else{ %><%="/default.png"%><% } %>"
             salt="" /></a>
             <div class="product-info">
@@ -104,16 +104,7 @@
   <!-- End Main -->
   <!-- Side Full -->
   <div class="side-full">
-    <!-- More Products -->
-    <div class="more-products">
-      <div class="more-products-holder">
-        <ul>
-          <li class="last"><a href="#"><img src="css/images/small7.jpg" alt="" /></a></li>
-        </ul>
-      </div>
-      <div class="more-nav"> <a href="#" class="prev">previous</a> <a href="#" class="next">next</a> </div>
-    </div>
-    <!-- End More Products -->
+
     <!-- Text Cols -->
     <div class="cols">
       <div class="cl">&nbsp;</div>
