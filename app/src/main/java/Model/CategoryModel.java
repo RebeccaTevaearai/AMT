@@ -14,10 +14,10 @@ public class CategoryModel implements CategoryInterface {
     @Override
     public ArrayList<Category> getAllCategory() {
         Category category = null;
-        ArrayList<Category> categories = new ArrayList<Category>();
+        ArrayList<Category> categories = new ArrayList<>();
         try {
             Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM `category`");
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Category`");
             ResultSet resultSet = st.executeQuery();
 
             while (resultSet.next()){
@@ -35,14 +35,34 @@ public class CategoryModel implements CategoryInterface {
         Category category = null;
         try {
             Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM `category`");
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Category` WHERE `name` = ?");
+            st.setString(1,name);
             ResultSet resultSet = st.executeQuery();
 
+            resultSet.next();
             category = new Category(resultSet.getLong("id"), resultSet.getString("name"));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return category;
+    }
+
+    public ArrayList<Category> getCategoryByArticleId(Long id) {
+        ArrayList<Category> categories = new ArrayList<>();
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Category` " +
+                    "INNER JOIN `isDefineBy` ON `isDefineBy`.`id_Category` = `Category`.`id` WHERE `isDefineBy`.`id_Article` = ?");
+            st.setString(1,id.toString());
+            ResultSet resultSet = st.executeQuery();
+
+            resultSet.next();
+            categories.add(new Category(resultSet.getLong("id"), resultSet.getString("name")));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return categories;
     }
 }

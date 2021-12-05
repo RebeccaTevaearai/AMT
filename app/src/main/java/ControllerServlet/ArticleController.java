@@ -31,25 +31,26 @@ public class ArticleController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         ArticleModel articleModel = new ArticleModel();
         CategoryModel cm = new CategoryModel();
+
         ArrayList<Category> categories = cm.getAllCategory();
         String filter = req.getParameter("categories");
         ArrayList<Category> categoriesFilter = new ArrayList<>();
-        for(String s : filter.split(";"))
-        {
-            Category c = cm.getCategoryByName(s);
-            if(c != null)
-            {
-                categoriesFilter.add(c);
+        if(filter != null) {
+            for (String s : filter.split(";")) {
+                Category c = cm.getCategoryByName(s);
+                if (c != null) {
+                    categoriesFilter.add(c);
+                }
             }
         }
-        ArrayList<Article> articles = articleModel.getArticleByCatergories(new Category[0]);
+        ArrayList<Article> articles = articleModel.getArticleByCatergories(categoriesFilter);
 
-        HttpSession session = req.getSession();
-        session.setAttribute("id",1);
-        req.setAttribute("name", articles.get(0).getName());
-        req.setAttribute("description", articles.get(0).getDescription());
+        req.setAttribute("categories", categories);
+        req.setAttribute("articles", articles);
+
         req.getRequestDispatcher("index.jsp").forward(req,resp);
     }
 }
