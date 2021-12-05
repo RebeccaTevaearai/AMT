@@ -23,8 +23,11 @@
       <div class="products">
         <div class="cl">&nbsp;</div>
         <ul>
-          <% ArrayList<Article> articles = (ArrayList<Article>) request.getAttribute("articles");
-            for(Article article : articles){ %>
+
+          <% ArrayList<Article> articles = (ArrayList<Article>) request.getAttribute("articles");%>
+          <% if (articles.isEmpty())%>
+          <%= "Aucun article trouvé"%>
+          <% for(Article article : articles){ %>
 
 
           <li><a href="/article/<%= article.getId() %>">
