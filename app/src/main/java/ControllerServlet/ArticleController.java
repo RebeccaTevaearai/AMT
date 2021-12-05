@@ -18,6 +18,7 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @WebServlet(name = "articleServlet", value = "",
 initParams = {
         @WebInitParam(name = "categories", value = "")

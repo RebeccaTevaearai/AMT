@@ -11,4 +11,10 @@ public interface ArticleInterface {
      * @return Un tableau avec tous les articles qui possède au moins une des catégories
      */
     public ArrayList<Article> getArticleByCatergories(ArrayList<Category> categories);
+
+    /***
+     * @param id
+     * @return L'article
+     */
+    public Article getArticleById(Long id);
 }

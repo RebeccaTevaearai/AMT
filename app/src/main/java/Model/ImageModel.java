@@ -8,15 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class ImageModel {
+public class ImageModel implements ImageInterface {
 
-    public ArrayList<Image> getImageByArticleId(Long article_id)
+    @Override
+    public ArrayList<Image> getImageByArticleId(Long idArticle)
     {
         ArrayList<Image> images = new ArrayList<>();
         try {
             Connection connection = DatabaseConnection.getConnection();
             PreparedStatement st = connection.prepareStatement("SELECT * FROM `Image` WHERE `id_Article` = ?");
-            st.setString(1,article_id.toString());
+            st.setString(1, idArticle.toString());
             ResultSet resultSet = st.executeQuery();
 
             while (resultSet.next()){

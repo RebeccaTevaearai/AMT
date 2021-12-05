@@ -48,13 +48,14 @@ public class CategoryModel implements CategoryInterface {
         return category;
     }
 
-    public ArrayList<Category> getCategoryByArticleId(Long id) {
+    @Override
+    public ArrayList<Category> getCategoryByArticleId(Long idArticle) {
         ArrayList<Category> categories = new ArrayList<>();
         try {
             Connection connection = DatabaseConnection.getConnection();
             PreparedStatement st = connection.prepareStatement("SELECT * FROM `Category` " +
                     "INNER JOIN `isDefineBy` ON `isDefineBy`.`id_Category` = `Category`.`id` WHERE `isDefineBy`.`id_Article` = ?");
-            st.setString(1,id.toString());
+            st.setString(1, idArticle.toString());
             ResultSet resultSet = st.executeQuery();
 
             resultSet.next();
