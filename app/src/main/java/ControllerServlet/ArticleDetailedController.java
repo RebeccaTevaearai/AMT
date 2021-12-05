@@ -1,5 +1,8 @@
 package ControllerServlet;
 
+import Data.Article;
+import Model.ArticleModel;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +23,8 @@ public class ArticleDetailedController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String stringId = req.getPathInfo().replace("/","");
         Integer id = Integer.parseInt(stringId);
-        req.setAttribute("id",id);
+        Article article = new ArticleModel().getArticleById(id.longValue());
+        req.setAttribute("article",article);
         req.getRequestDispatcher("jsps/detailed.jsp").forward(req,resp);
     }
 }

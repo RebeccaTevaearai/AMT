@@ -14,4 +14,10 @@ public interface CategoryInterface {
      * @return la category null si vide
      */
     public Category getCategoryByName(String name);
+
+    /**
+     * @param idArticle Id de l'article
+     * @return Toutes les categories d'un article
+     */
+    public ArrayList<Category> getCategoryByArticleId(Long idArticle);
 }

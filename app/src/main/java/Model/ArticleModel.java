@@ -31,9 +31,32 @@ public class ArticleModel implements ArticleInterface{
         return article;
     }
 
+    @Override
     public Article getArticleById(Long id){
+        Article article = null;
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Article` WHERE `id` = ?");
+            st.setString(1,id.toString());
 
-        return new Article();
+            ResultSet resultSet = st.executeQuery();
+            resultSet.next();
+
+            long idArticle = resultSet.getLong("Article.id");
+            ArrayList<Image> images  = new ImageModel().getImageByArticleId(idArticle);
+
+            ArrayList<Category> articleCategories = new CategoryModel().getCategoryByArticleId(idArticle);
+
+            article = new Article(idArticle,resultSet.getString("name")
+                    ,resultSet.getString("description"),resultSet.getLong("quantity")
+                    ,resultSet.getDouble("price"), articleCategories, images);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return article;
     }
 
 
