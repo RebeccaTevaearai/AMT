@@ -65,12 +65,13 @@ INSERT INTO `Article` (`id`, `name`, `description`, `quantity`, `price`) VALUES
 
 ALTER TABLE `Image`;
 INSERT INTO `Image` (`id`, `path`, `id_article`) VALUES
-(1, '/bid/big1.jpg', 1),
+(1, '/big/big1.jpg', 1),
 (2, '/small/small1.jpg', 1);
 
 ALTER TABLE `Category`;
 INSERT INTO `Category` (`id`, `name`) VALUES
-	(1, 'Canne');
+	(1, 'Canne'),
+	(2, 'Veste');
 
 ALTER TABLE `isDefineBy`;
 INSERT INTO `isDefineBy` (`id_Article`, `id_Category`) VALUES

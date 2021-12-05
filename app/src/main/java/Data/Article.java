@@ -1,5 +1,7 @@
 package Data;
 
+import java.util.ArrayList;
+
 public class Article {
 
     private long id;
@@ -7,13 +9,17 @@ public class Article {
     private String description;
     private long quantity;
     private double price;
+    private ArrayList<Image> images;
+    private ArrayList<Category> categories;
 
-    public Article(long id, String name, String description, long quantity, double price) {
+    public Article(long id, String name, String description, long quantity, double price, ArrayList<Category> categories, ArrayList<Image> images) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
         this.price = price;
+        this.images = images;
+        this.categories = categories;
     }
 
     public Article() {
@@ -57,5 +63,21 @@ public class Article {
 
     public void setQuantity(long quantity) {
         this.quantity = quantity;
+    }
+
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
+
+    public ArrayList<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<Image> images) {
+        this.images = images;
     }
 }
