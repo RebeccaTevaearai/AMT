@@ -1,6 +1,6 @@
-<%@ page import="Data.Article" %>
-<%@ page import="Data.Image" %>
-<%@ page import="Data.Category" %><%--
+<%@ page import="data.Article" %>
+<%@ page import="data.Image" %>
+<%@ page import="data.Category" %><%--
   Created by IntelliJ IDEA.
   User: matth
   Date: 22.11.2021

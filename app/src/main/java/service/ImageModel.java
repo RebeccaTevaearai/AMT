@@ -1,7 +1,6 @@
-package Model;
+package service;
 
-import Data.Article;
-import Data.Image;
+import data.Image;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,6 +1,6 @@
-package Model;
+package service;
 
-import Data.Image;
+import data.Image;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,7 @@
-package Model;
+package service;
 
 
-import Data.Article;
-import Data.Category;
+import data.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,10 +33,9 @@ public class CategoryModel implements CategoryInterface {
     public Category getCategoryByName(String name) {
         Category category = null;
         try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Category` WHERE `name` = ?");
-            st.setString(1,name);
-            ResultSet resultSet = st.executeQuery();
+            ArrayList<String> param = new ArrayList<String>();
+            param.add(name);
+            ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Category` WHERE `name` = ?", param);
 
             resultSet.next();
             category = new Category(resultSet.getLong("id"), resultSet.getString("name"));

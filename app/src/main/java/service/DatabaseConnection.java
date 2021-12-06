@@ -1,14 +1,13 @@
-package Model;
+package service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseConnection {
 
     private static Connection connection;
     private static DatabaseConnection instance;
-    private static final String URL = "jdbc:mysql://localhost:3306/pecheur";
+    private static final String URL = "jdbc:mysql://localhost:3306/pecheur?serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PWD = "";
 
@@ -29,5 +28,18 @@ public class DatabaseConnection {
         }
 
         return connection;
+    }
+
+    public static ResultSet doQuery(String query, ArrayList<String> params) throws SQLException {
+        PreparedStatement st = getConnection().prepareStatement(query);
+
+        int nbParam = 1;
+        for(String param : params)
+        {
+            st.setString(nbParam, param);
+            nbParam++;
+        }
+
+      return st.executeQuery() ;
     }
 }

@@ -1,8 +1,8 @@
-package Model;
+package service;
 
-import Data.Article;
-import Data.Category;
-import Data.Image;
+import data.Article;
+import data.Category;
+import data.Image;
 
 import java.sql.*;
 import java.util.ArrayList;

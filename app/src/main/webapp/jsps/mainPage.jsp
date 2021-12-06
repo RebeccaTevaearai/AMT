@@ -1,5 +1,5 @@
-<%@ page import="Data.Category" %>
-<%@ page import="Data.Article" %>
+<%@ page import="data.Category" %>
+<%@ page import="data.Article" %>
 <%@ page import="java.util.ArrayList" %>
 <!-- Main -->
   <div id="main">

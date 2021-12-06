@@ -1,6 +1,6 @@
-package Model;
+package service;
 
-import Data.Category;
+import data.Category;
 import java.util.ArrayList;
 
 public interface CategoryInterface {
