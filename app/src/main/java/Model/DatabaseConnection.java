@@ -8,12 +8,15 @@ public class DatabaseConnection {
 
     private static Connection connection;
     private static DatabaseConnection instance;
+    private static final String URL = "jdbc:mysql://localhost:3306/pecheur";
+    private static final String USER = "root";
+    private static final String PWD = "";
 
     private DatabaseConnection() {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pecheur?serverTimezone=UTC"
-                    ,"root","");
+            connection = DriverManager.getConnection(URL
+                    ,USER,PWD);
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }

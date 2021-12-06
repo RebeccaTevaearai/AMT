@@ -1,4 +1,7 @@
-  <!-- Main -->
+<%@ page import="Data.Category" %>
+<%@ page import="Data.Article" %>
+<%@ page import="java.util.ArrayList" %>
+<!-- Main -->
   <div id="main">
     <div class="cl">&nbsp;</div>
     <!-- Content -->
@@ -20,36 +23,31 @@
       <div class="products">
         <div class="cl">&nbsp;</div>
         <ul>
-          <li> <a href="#"><img src="css/images/big1.jpg" alt="" /></a>
+
+          <% ArrayList<Article> articles = (ArrayList<Article>) request.getAttribute("articles");%>
+          <% if (articles.isEmpty()){%>
+          <%= "Aucun article trouvé"%>
+          <% }for(Article article : articles){ %>
+
+
+          <li><a href="<%=application.getContextPath() %>/article?id=<%= article.getId() %>">
+            <img src="css/images<% if(!article.getImages().isEmpty()){ %><%=article.getImages().get(0).getPath()%><% }else{ %><%="/default.png"%><% } %>"
+            salt="" /></a>
             <div class="product-info">
-              <h3>LOREM IPSUM</h3>
+              <h3><% article.getName(); %></h3>
               <div class="product-desc">
-                <h4>WOMEN’S</h4>
-                <p>Lorem ipsum dolor sit<br />
-                  amet</p>
-                <strong class="price">$58.99</strong> </div>
+                <h4>
+                  <% if(!article.getCategories().isEmpty()){ %>
+                    <%= article.getCategories().get(0).getName() %>
+                  <% }else{ %>
+                    <%= "None" %>
+                  <%} %>
+                </h4>
+                <p><%= article.getDescription() %></p>
+                <strong class="price"><%= article.getPrice() %> CHF</strong> </div>
             </div>
           </li>
-          <li> <a href="#"><img src="css/images/big1.jpg" alt="" /></a>
-            <div class="product-info">
-              <h3>LOREM IPSUM</h3>
-              <div class="product-desc">
-                <h4>WOMEN’S</h4>
-                <p>Lorem ipsum dolor sit<br />
-                  amet</p>
-                <strong class="price">$58.99</strong> </div>
-            </div>
-          </li>
-          <li class="last"> <a href="#"><img src="css/images/big1.jpg" alt="" /></a>
-            <div class="product-info">
-              <h3>LOREM IPSUM</h3>
-              <div class="product-desc">
-                <h4>WOMEN’S</h4>
-                <p>Lorem ipsum dolor sit<br />
-                  amet</p>
-                <strong class="price">$58.99</strong> </div>
-            </div>
-          </li>
+          <% } %>
         </ul>
         <div class="cl">&nbsp;</div>
       </div>
@@ -91,19 +89,10 @@
         <h2>Categories <span></span></h2>
         <div class="box-content">
           <ul>
-            <li><a href="#">Category 1</a></li>
-            <li><a href="#">Category 2</a></li>
-            <li><a href="#">Category 3</a></li>
-            <li><a href="#">Category 4</a></li>
-            <li><a href="#">Category 5</a></li>
-            <li><a href="#">Category 6</a></li>
-            <li><a href="#">Category 7</a></li>
-            <li><a href="#">Category 8</a></li>
-            <li><a href="#">Category 9</a></li>
-            <li><a href="#">Category 10</a></li>
-            <li><a href="#">Category 11</a></li>
-            <li><a href="#">Category 12</a></li>
-            <li class="last"><a href="#">Category 13</a></li>
+            <% ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+              for(Category category : categories){ %>
+            <li value="<%= category.getId() %>"><a href="?categories=<%= category.getName() %>"><%= category.getName() %></a></li>
+            <% } %>
           </ul>
         </div>
       </div>
@@ -115,36 +104,7 @@
   <!-- End Main -->
   <!-- Side Full -->
   <div class="side-full">
-    <!-- More Products -->
-    <div class="more-products">
-      <div class="more-products-holder">
-        <ul>
-          <li><a href="#"><img src="css/images/small1.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small2.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small3.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small4.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small5.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small6.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small7.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small1.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small2.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small3.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small4.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small5.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small6.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small7.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small1.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small2.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small3.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small4.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small5.jpg" alt="" /></a></li>
-          <li><a href="#"><img src="css/images/small6.jpg" alt="" /></a></li>
-          <li class="last"><a href="#"><img src="css/images/small7.jpg" alt="" /></a></li>
-        </ul>
-      </div>
-      <div class="more-nav"> <a href="#" class="prev">previous</a> <a href="#" class="next">next</a> </div>
-    </div>
-    <!-- End More Products -->
+
     <!-- Text Cols -->
     <div class="cols">
       <div class="cl">&nbsp;</div>
