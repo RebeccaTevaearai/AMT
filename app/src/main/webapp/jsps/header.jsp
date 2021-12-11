@@ -2,6 +2,7 @@
     <title>Shop Around</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="<%=application.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="<%=application.getContextPath() %>/css/cart.css" type="text/css" rel="stylesheet" media="all">
 
     <!-- <link rel="stylesheet" href="/css/style.css" type="text/css" media="all" /> -->
     <!--[if lte IE 6]><link rel="stylesheet" href="<%=application.getContextPath() %>/css/ie6.css" type="text/css" media="all" /><![endif]-->
