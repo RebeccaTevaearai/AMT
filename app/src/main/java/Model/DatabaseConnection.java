@@ -10,7 +10,7 @@ public class DatabaseConnection {
     private static DatabaseConnection instance;
     private static final String URL = "jdbc:mysql://localhost:3306/pecheur";
     private static final String USER = "root";
-    private static final String PWD = "";
+    private static final String PWD = "12345";
 
     private DatabaseConnection() {
         try {
