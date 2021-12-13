@@ -2,8 +2,8 @@ package controller;
 
 import data.Article;
 import data.Category;
-import service.ArticleModel;
-import service.CategoryModel;
+import service.ArticleQueries;
+import service.CategoryQueries;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -29,8 +29,8 @@ public class ArticleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ArticleModel articleModel = new ArticleModel();
-        CategoryModel cm = new CategoryModel();
+        ArticleQueries articleQueries = new ArticleQueries();
+        CategoryQueries cm = new CategoryQueries();
 
         ArrayList<Category> categories = cm.getAllCategory();
         String filter = req.getParameter("categories");
@@ -43,7 +43,7 @@ public class ArticleController extends HttpServlet {
                 }
             }
         }
-        ArrayList<Article> articles = articleModel.getArticleByCatergories(categoriesFilter);
+        ArrayList<Article> articles = articleQueries.getArticleByCatergories(categoriesFilter);
 
         req.setAttribute("categories", categories);
         req.setAttribute("articles", articles);
