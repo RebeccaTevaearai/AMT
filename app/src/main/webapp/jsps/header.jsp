@@ -25,8 +25,8 @@
         <div id="navigation">
             <ul>
                 <li><a href="<%=application.getContextPath() %>" class="active">Home</a></li>
-                <li><a href="#">Support</a></li>
-                <li><a href="#">My Account</a></li>
+                <li><a href="<%=application.getContextPath() %>/login">Login</a></li>
+                <li><a href="<%=application.getContextPath() %>/login" class="active">My Account</a></li>
                 <li><a href="#">The Store</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
