@@ -4,48 +4,25 @@ import data.Article;
 import data.Category;
 import data.Image;
 
+import java.io.StringReader;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ArticleModel implements ArticleInterface{
-
-    public Article getArticleByName(String name) throws SQLException {
-        //TODO connection BD
-        Article article = null;
-        try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Article` WHERE name = ?");
-            st.setString(1,name);
-            ResultSet resultSet = st.executeQuery();
-
-            while (resultSet.next()){
-                article = new Article(resultSet.getLong("id"),resultSet.getString("name")
-                        ,resultSet.getString("description"),resultSet.getLong("quantity")
-                        ,resultSet.getDouble("price"),new ArrayList<>(), new ArrayList<>());
-            }
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return article;
-    }
+public class ArticleQueries implements ArticleInterface{
 
     @Override
     public Article getArticleById(Long id){
         Article article = null;
         try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Article` WHERE `id` = ?");
-            st.setString(1,id.toString());
+            ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Article` WHERE `id` = ?",
+                new ArrayList<String>() {{ add(id.toString()); }});
 
-            ResultSet resultSet = st.executeQuery();
             resultSet.next();
 
             long idArticle = resultSet.getLong("Article.id");
-            ArrayList<Image> images  = new ImageModel().getImageByArticleId(idArticle);
+            ArrayList<Image> images  = new ImageQueries().getImageByArticleId(idArticle);
 
-            ArrayList<Category> articleCategories = new CategoryModel().getCategoryByArticleId(idArticle);
+            ArrayList<Category> articleCategories = new CategoryQueries().getCategoryByArticleId(idArticle);
 
             article = new Article(idArticle,resultSet.getString("name")
                     ,resultSet.getString("description"),resultSet.getLong("quantity")
@@ -65,7 +42,6 @@ public class ArticleModel implements ArticleInterface{
 
         ArrayList<Article> articles = new ArrayList<>();
         try {
-            Connection connection = DatabaseConnection.getConnection();
             String query = "SELECT * FROM `Article` ";
 
             if(!categories.isEmpty())
@@ -82,15 +58,13 @@ public class ArticleModel implements ArticleInterface{
                 }
             }
 
-            PreparedStatement st = connection.prepareStatement(query);
-
-            ResultSet resultSet = st.executeQuery();
+            ResultSet resultSet = DatabaseConnection.doQuery(query,new ArrayList<String>());
 
             while (resultSet.next()){
                 long idArticle = resultSet.getLong("Article.id");
-                ArrayList<Image> images  = new ImageModel().getImageByArticleId(idArticle);
+                ArrayList<Image> images  = new ImageQueries().getImageByArticleId(idArticle);
 
-                ArrayList<Category> articleCategories = new CategoryModel().getCategoryByArticleId(idArticle);
+                ArrayList<Category> articleCategories = new CategoryQueries().getCategoryByArticleId(idArticle);
 
                 articles.add(new Article(idArticle,resultSet.getString("Article.name")
                         ,resultSet.getString("description"),resultSet.getLong("quantity")
