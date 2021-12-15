@@ -8,10 +8,12 @@ name: Create release
 on:
   pull_request:
     branches: main
-    types: closed
+    // on.pull_request.closed , it is designed that whenever the PR is closed the workflow will be triggered.
+    types: closed 
 
 jobs:
   build:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Tag
