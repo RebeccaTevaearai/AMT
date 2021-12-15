@@ -1,7 +1,5 @@
 // https://github.com/marketplace/actions/semver-release
-// Assuming that a PR is tagged with a "semver-compliant"
-// label (patch, minor or major), then this action can create
-// a tag and a GitHub release when it is merged.
+// Assuming that a PR is tagged with a "semver-compliant" label (patch, minor or major), then this action can create a tag and a GitHub release when it is merged.
 
 name: Create release
 
