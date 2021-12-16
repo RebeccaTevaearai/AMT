@@ -55,7 +55,7 @@ jobs:
       # BUILD
       - name: Build with Maven
         run: |
-          cd my-app
+          cd app
           mvn -B package --file pom.xml
      
       # RELEASE
@@ -67,4 +67,4 @@ jobs:
           title: "${{ steps.semver.outputs.tag }}"         
           prerelease: false
           # Release title; defaults to the tag name if none specified.
-          files: my-app/target/TestJ2E-1.0-SNAPSHOT.war
+          files: app/target/proj-1.0-SNAPSHOT.war
