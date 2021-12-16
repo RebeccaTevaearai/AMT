@@ -4,7 +4,6 @@
 name: Create release
 
 on:
-  workflow_dispatch:
   pull_request:
     branches: main
     # on.pull_request.closed , it is designed that whenever the PR is closed the workflow will be triggered.
@@ -15,15 +14,6 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:   
-      - name: Compute next SemVer tag
-        id: semver
-        uses: K-Phoen/semver-release-action@master
-        with:
-          release_branch: main
-          release_strategy: none
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/checkout@v2
       
       - name: Set up JDK 11
@@ -32,12 +22,43 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
+      # NEW TAG  
+      - name: Compute next SemVer tag
+        id: semver
+        uses: K-Phoen/semver-release-action@master
+        with:
+          release_branch: main
+          release_strategy: none
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
+      # FOOTER
+      - name: Update vernum footer
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      - name: Create local changes
+        run: |
+          sed -i 's/AMT v...../AMT ${{ steps.semver.outputs.tag }}/g' my-app/src/main/webapp/jsps/footer.jsp
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      
+      # BUILD
       - name: Build with Maven
         run: |
-          cd app
+          cd my-app
           mvn -B package --file pom.xml
-      
+     
+      # RELEASE
       - name: create release
         uses: "marvinpinto/action-automatic-releases@latest"
         with: 
@@ -46,4 +67,4 @@ jobs:
           title: "${{ steps.semver.outputs.tag }}"         
           prerelease: false
           # Release title; defaults to the tag name if none specified.
-          files: app/target/proj-1.0-SNAPSHOT.war
+          files: my-app/target/TestJ2E-1.0-SNAPSHOT.war
