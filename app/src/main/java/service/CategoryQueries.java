@@ -1,24 +1,18 @@
-package Model;
+package service;
 
 
-import Data.Article;
-import Data.Category;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import data.Category;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class CategoryModel implements CategoryInterface {
+public class CategoryQueries implements CategoryInterface {
 
     @Override
     public ArrayList<Category> getAllCategory() {
         Category category = null;
         ArrayList<Category> categories = new ArrayList<>();
         try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Category`");
-            ResultSet resultSet = st.executeQuery();
+            ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Category`", new ArrayList<>());
 
             while (resultSet.next()){
                 category = new Category(resultSet.getLong("id"), resultSet.getString("name"));
@@ -34,10 +28,8 @@ public class CategoryModel implements CategoryInterface {
     public Category getCategoryByName(String name) {
         Category category = null;
         try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Category` WHERE `name` = ?");
-            st.setString(1,name);
-            ResultSet resultSet = st.executeQuery();
+            ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Category` WHERE `name` = ?",
+                    new ArrayList<String>() {{add(name);}});
 
             resultSet.next();
             category = new Category(resultSet.getLong("id"), resultSet.getString("name"));
@@ -52,11 +44,9 @@ public class CategoryModel implements CategoryInterface {
     public ArrayList<Category> getCategoryByArticleId(Long idArticle) {
         ArrayList<Category> categories = new ArrayList<>();
         try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement st = connection.prepareStatement("SELECT * FROM `Category` " +
-                    "INNER JOIN `isDefineBy` ON `isDefineBy`.`id_Category` = `Category`.`id` WHERE `isDefineBy`.`id_Article` = ?");
-            st.setString(1, idArticle.toString());
-            ResultSet resultSet = st.executeQuery();
+            ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Category` " +
+                    "INNER JOIN `isDefineBy` ON `isDefineBy`.`id_Category` = `Category`.`id` WHERE `isDefineBy`.`id_Article` = ?",
+                    new ArrayList<String>() {{add(idArticle.toString());}});
 
             resultSet.next();
             categories.add(new Category(resultSet.getLong("id"), resultSet.getString("name")));

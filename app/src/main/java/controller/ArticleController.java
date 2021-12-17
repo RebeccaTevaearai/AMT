@@ -1,9 +1,9 @@
-package ControllerServlet;
+package controller;
 
-import Data.Article;
-import Data.Category;
-import Model.ArticleModel;
-import Model.CategoryModel;
+import data.Article;
+import data.Category;
+import service.ArticleQueries;
+import service.CategoryQueries;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -11,15 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.List;
 
 
-@WebServlet(name = "articleServlet", value = "",
+@WebServlet(name = "articleServlet", urlPatterns = "/home",
 initParams = {
         @WebInitParam(name = "categories", value = "")
 })
@@ -33,8 +29,8 @@ public class ArticleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ArticleModel articleModel = new ArticleModel();
-        CategoryModel cm = new CategoryModel();
+        ArticleQueries articleQueries = new ArticleQueries();
+        CategoryQueries cm = new CategoryQueries();
 
         ArrayList<Category> categories = cm.getAllCategory();
         String filter = req.getParameter("categories");
@@ -47,11 +43,11 @@ public class ArticleController extends HttpServlet {
                 }
             }
         }
-        ArrayList<Article> articles = articleModel.getArticleByCatergories(categoriesFilter);
+        ArrayList<Article> articles = articleQueries.getArticleByCatergories(categoriesFilter);
 
         req.setAttribute("categories", categories);
         req.setAttribute("articles", articles);
 
-        req.getRequestDispatcher("index.jsp").forward(req,resp);
+        req.getRequestDispatcher("./index.jsp").forward(req,resp);
     }
 }

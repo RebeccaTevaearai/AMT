@@ -1,6 +1,6 @@
-<%@ page import="Data.Article" %>
-<%@ page import="Data.Image" %>
-<%@ page import="Data.Category" %><%--
+<%@ page import="data.Article" %>
+<%@ page import="data.Image" %>
+<%@ page import="data.Category" %><%--
   Created by IntelliJ IDEA.
   User: matth
   Date: 22.11.2021
@@ -35,7 +35,7 @@
             <%}for (Image image : article.getImages())
                 {%>
                 <li>
-                    <img src="css/images<%=image.getPath()%>" />
+                    <img src="<%=application.getContextPath() %>/css/images<%=image.getPath()%>" />
                 </li>
             <%}%>
         </ul>

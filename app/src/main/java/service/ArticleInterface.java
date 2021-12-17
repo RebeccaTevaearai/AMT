@@ -1,7 +1,7 @@
-package Model;
+package service;
 
-import Data.Article;
-import Data.Category;
+import data.Article;
+import data.Category;
 
 import java.util.ArrayList;
 
