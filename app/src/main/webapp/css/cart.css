@@ -1,0 +1,79 @@
+.cartContainer {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas: "cart checkout";
+    padding: 10px;
+}
+
+.listArticles {
+    grid-area: cart;
+}
+
+.checkout {
+    grid-area: checkout;
+    align-self: center;
+}
+
+.checkoutBtn {
+    padding: 10px;
+    margin: 10px;
+    background-color: #aa2424;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+#summary, #summary tr td, #summary tr th {
+    border: 1px solid black;
+}
+
+
+.title {
+    font-weight: bold;
+    font-size: medium;
+    padding: 5px;
+    color: black;
+}
+
+td {
+    padding: 5px;
+    text-align: center;
+}
+
+.cartImg {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+    "name"
+    "img";
+}
+
+.articleName {
+    grid-area: name;
+    padding: 5px;
+}
+
+.articleImgCont {
+    grid-area: img;
+}
+
+.articleImg {
+    height: 150px;
+    width: auto;
+}
+
+.button {
+    cursor:pointer;
+}
+
+.delButn {
+    background:url(images/delete.png) no-repeat center;
+    background-size: 20px;
+    border:none;
+    height: 20px;
+    width: 20px;
+}
