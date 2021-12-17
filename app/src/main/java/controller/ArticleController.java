@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-@WebServlet(name = "articleServlet", value = "",
+@WebServlet(name = "articleServlet", urlPatterns = "/home",
 initParams = {
         @WebInitParam(name = "categories", value = "")
 })
@@ -47,8 +47,7 @@ public class ArticleController extends HttpServlet {
 
         req.setAttribute("categories", categories);
         req.setAttribute("articles", articles);
-        ArticleDetailedController a = new ArticleDetailedController();
-        a.doGet(req,resp);
-        req.getRequestDispatcher("index.jsp").forward(req,resp);
+
+        req.getRequestDispatcher("./index.jsp").forward(req,resp);
     }
 }

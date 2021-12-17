@@ -30,7 +30,7 @@
           <% }for(Article article : articles){ %>
 
 
-          <li><a href="<%=application.getContextPath() %>/article?id=<%= article.getId() %>">
+          <li><a href="<%=application.getContextPath() %>/articles/<%= article.getId() %>">
             <img src="css/images<% if(!article.getImages().isEmpty()){ %><%=article.getImages().get(0).getPath()%><% }else{ %><%="/default.png"%><% } %>"
             salt="" /></a>
             <div class="product-info">

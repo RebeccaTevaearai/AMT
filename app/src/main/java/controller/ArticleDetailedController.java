@@ -26,6 +26,6 @@ public class ArticleDetailedController extends HttpServlet {
         Article article = new ArticleQueries().getArticleById(id.longValue());
 
         req.setAttribute("article",article);
-        req.getRequestDispatcher("jsps/detailed.jsp").forward(req,resp);
+        req.getRequestDispatcher("../jsps/detailed.jsp").forward(req,resp);
     }
 }

@@ -35,7 +35,7 @@
             <%}for (Image image : article.getImages())
                 {%>
                 <li>
-                    <img src="css/images<%=image.getPath()%>" />
+                    <img src="<%=application.getContextPath() %>/css/images<%=image.getPath()%>" />
                 </li>
             <%}%>
         </ul>

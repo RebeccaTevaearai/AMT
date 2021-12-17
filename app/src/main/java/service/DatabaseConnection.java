@@ -40,6 +40,6 @@ public class DatabaseConnection {
             nbParam++;
         }
 
-      return st.executeQuery() ;
+      return st.executeQuery();
     }
 }
