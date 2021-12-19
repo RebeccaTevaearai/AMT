@@ -2,30 +2,21 @@ package service;
 
 import data.Account;
 import data.Article;
+import data.CartArticle;
 
 import java.util.ArrayList;
 
 
 public class CartService {
 
-    public class ArticleQuantity{
-        public Article article;
-        public int quantity;
-
-        ArticleQuantity(Article article, int quantity){
-            this.article = article;
-            this.quantity = quantity;
-        }
-    }
-
-    private ArrayList<ArticleQuantity> articles;
+    private ArrayList<CartArticle> articles;
     private Account account;
 
-    CartService(ArrayList<ArticleQuantity> articles){
+    CartService(ArrayList<CartArticle> articles){
         this.articles = articles;
     }
 
-    public ArrayList<ArticleQuantity> getCartArticle()
+    public ArrayList<CartArticle> getCartArticle()
     {
         return articles;
     }
@@ -33,26 +24,27 @@ public class CartService {
     public double total()
     {
         double total = 0;
-        for(ArticleQuantity articleQuantity : articles)
+        for(CartArticle articleQuantity : articles)
         {
-            total += articleQuantity.article.getPrice() * articleQuantity.quantity;
+            total += articleQuantity.getArticle().getPrice()
+                    * articleQuantity.getQuantity();
         }
         return total;
     }
 
-    public ArrayList<ArticleQuantity> addArticle(Article article, int quantity)
+    public ArrayList<CartArticle> addArticle(Article article, int quantity)
     {
         //TODO verif si pas déjà dans panier
-        articles.add(new ArticleQuantity(article,quantity));
+        articles.add(new CartArticle(article,quantity));
         return articles;
     }
 
-    public ArrayList<ArticleQuantity> deleteArticle(Article article){
+    public ArrayList<CartArticle> deleteArticle(Article article){
         //TODO
         return articles;
     }
 
-    public ArrayList<ArticleQuantity> changeQuantity(Article article, int quantity)
+    public ArrayList<CartArticle> changeQuantity(Article article, int quantity)
     {
         //TODO
         return articles;
