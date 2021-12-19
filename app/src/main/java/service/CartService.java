@@ -10,15 +10,10 @@ import java.util.ArrayList;
 public class CartService {
 
     private ArrayList<CartArticle> articles;
-    private Account account;
+    private Account account = null;
 
-    CartService(ArrayList<CartArticle> articles){
+    public CartService(ArrayList<CartArticle> articles){
         this.articles = articles;
-    }
-
-    public ArrayList<CartArticle> getCartArticle()
-    {
-        return articles;
     }
 
     public double total()
@@ -32,21 +27,78 @@ public class CartService {
         return total;
     }
 
+    public int totalArticles()
+    {
+        int total = 0;
+        for(CartArticle articleQuantity : articles)
+        {
+            total += articleQuantity.getQuantity();
+        }
+        return total;
+    }
+
     public ArrayList<CartArticle> addArticle(Article article, int quantity)
     {
-        //TODO verif si pas déjà dans panier
+        for (CartArticle cartArticle : articles)
+        {
+            if(cartArticle.getArticle().getId() == article.getId())
+            {
+                return updateQuantity(article,cartArticle.getQuantity() + quantity);
+            }
+        }
+
         articles.add(new CartArticle(article,quantity));
+        if(!(account == null))
+        {
+            new CartQueries().addArticle(account.getId(),article.getId(),quantity);
+        }
         return articles;
     }
 
     public ArrayList<CartArticle> deleteArticle(Article article){
-        //TODO
+        for (CartArticle cartArticle : articles)
+        {
+            if(cartArticle.getArticle().getId() == article.getId())
+            {
+                articles.remove(cartArticle);
+                break;
+            }
+        }
+
+        if(!(account == null))
+        {
+            new CartQueries().deleteArticle(account.getId(),article.getId());
+        }
         return articles;
     }
 
-    public ArrayList<CartArticle> changeQuantity(Article article, int quantity)
+    public ArrayList<CartArticle> updateQuantity(Article article, int quantity)
     {
-        //TODO
+        for (CartArticle cartArticle : articles)
+        {
+            if(cartArticle.getArticle().getId() == article.getId())
+            {
+                cartArticle.setQuantity(quantity);
+                break;
+            }
+        }
+
+        if(!(account == null))
+        {
+            new CartQueries().updateArticle(account.getId(),article.getId(),quantity);
+        }
         return articles;
+    }
+
+    public ArrayList<CartArticle> getArticles() {
+        return articles;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
