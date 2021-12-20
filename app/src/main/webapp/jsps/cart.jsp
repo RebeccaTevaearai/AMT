@@ -32,10 +32,10 @@
 			<div id="main">
 
 				<div class="cartContainer">
+					<%if(cartService.getArticles().isEmpty()){%>
+					<%="Votre panier est vide"%>
+					<%}else{%>
 					<div class="listArticles">
-						<%if(cartService.getArticles().isEmpty()){%>
-						<%="Votre panier est vide"%>
-						<%}else{%>
 						<table id="summary">
 							<tr>
 								<th class="title">Article</th>
@@ -67,7 +67,7 @@
 								</tr>
 							<%}%>
 						</table>
-						<%}%>
+
 					</div>
 					<div class="checkout">
 						<table>
@@ -90,6 +90,7 @@
 							<button class="button checkoutBtn" type="submit" >Payer</button>
 						</form>
 					</div>
+					<%}%>
 				</div>
 				<!----  End Main        -->
 
