@@ -38,5 +38,7 @@ Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` <
 ### Bases de donnée
 MariaDB (https://mariadb.org/download)
 
+Le fichier sql de la base de donnée est sql/DB.sql
+
 ## MCD
 <img src="images/MCD.png" height="200" />
