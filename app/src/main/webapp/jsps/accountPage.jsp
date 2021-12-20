@@ -9,11 +9,6 @@
 <br>
 <h1><%= session.getAttribute("username") %> account</h1>
 <br>
-<div><%= session.getAttribute("token") %></div>
-<br>
-<div><%= session.getAttribute("id") %></div>
-<br>
-<div><%= session.getAttribute("role") %></div>
 <br>
 <br>
 <form action="${pageContext.request.contextPath}/login" method="GET">

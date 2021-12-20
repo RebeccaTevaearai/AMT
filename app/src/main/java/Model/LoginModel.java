@@ -42,7 +42,6 @@ public class LoginModel {
             return null;
         }
         Cookie cookie = new Cookie("token", token);
-        cookie.setMaxAge(30);
         return cookie;
     }
 
