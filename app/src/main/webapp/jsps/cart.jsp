@@ -15,6 +15,12 @@
 		document.getElementById("total"+id).innerHTML = (totalDouble).toFixed(1) + " CHF";
 		document.getElementById("totalWithFees").innerHTML = (total+fees).toFixed(1) + " CHF";
 	}
+
+	function deleteArticle(id)
+	{
+		let article = document.getElementById(id);
+		article.parentNode.removeChild(article);
+	}
 </script>
 			<!-- Main -->
 			<div id="main">
@@ -34,7 +40,7 @@
 							</tr>
 
 							<%for(CartArticle cartArticle : cartService.getArticles()){%>
-								<tr>
+								<tr id="<%=cartArticle.getArticle().getId()%>">
 									<td class="cartImg">
 										<section class="articleName"><%=cartArticle.getArticle().getName()%></section>
 										<section class="articleImgCont">
@@ -50,7 +56,7 @@
 										<p id="total<%=cartArticle.getArticle().getId()%>"><%=cartArticle.getArticle().getPrice()*cartArticle.getQuantity()%> CHF</p>
 									</td>
 									<td>
-										<button class="button delButn" type="submit" value="Supprimer"/>
+										<button class="button delButn" onclick="deleteArticle(<%=cartArticle.getArticle().getId()%>)" type="submit" value="Supprimer"/>
 									</td>
 								</tr>
 							<%}%>
