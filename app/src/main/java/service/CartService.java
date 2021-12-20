@@ -27,7 +27,7 @@ public class CartService {
         return total;
     }
 
-    public int totalArticles()
+    public int articlesQuantity()
     {
         int total = 0;
         for(CartArticle articleQuantity : articles)

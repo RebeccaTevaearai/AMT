@@ -48,7 +48,7 @@
                 <form name="addToCartSubmit" method="post" action="<%=application.getContextPath() %>/cart">
                   <input name="id" value="<%=article.getId()%>" hidden>
                   <input name="quantity" value="1" hidden/>
-                  <button type="submit">Ajouter au panier</button>
+                  <button class="button" type="submit">Ajouter au panier</button>
                 </form>
             </div>
           </li>

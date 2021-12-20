@@ -21,7 +21,7 @@
         <div id="cart"> <a href="<%=application.getContextPath() %>/cart" class="cart-link">Votre panier</a>
             <div class="cl">&nbsp;</div>
             <% CartService cartService = (CartService) request.getAttribute("cartService");%>
-            <span>Articles: <strong><%=cartService.totalArticles()%></strong></span> &nbsp;&nbsp; <span>Cost: <strong><%=cartService.total()%> CHF</strong></span> </div>
+            <span>Articles: <strong><%=cartService.articlesQuantity()%></strong></span> &nbsp;&nbsp; <span>Cost: <strong><%=cartService.total()%> CHF</strong></span> </div>
         <!-- End Cart -->
         <!-- Navigation -->
         <div id="navigation">
