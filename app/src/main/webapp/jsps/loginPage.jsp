@@ -1,11 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    HttpSession sess = request.getSession(false);
-    if (sess != null) {
-        response.sendRedirect("/account");
-        return;
-    }
-%>
+
 <html>
 <head>
     <title>login</title>

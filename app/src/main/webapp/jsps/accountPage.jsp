@@ -1,13 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%
-    HttpSession sess = request.getSession(false);
-    if (sess == null) {
-        response.sendRedirect("/login");
-        return;
-    }
-%>
-
 <html>
 <head>
     <title>Account page</title>
@@ -16,8 +8,11 @@
 <br>
 <br>
 <h1><%= session.getAttribute("username") %> account</h1>
+<br>
 <div><%= session.getAttribute("token") %></div>
+<br>
 <div><%= session.getAttribute("id") %></div>
+<br>
 <div><%= session.getAttribute("role") %></div>
 <br>
 <br>

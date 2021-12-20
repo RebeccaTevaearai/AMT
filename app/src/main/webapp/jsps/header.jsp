@@ -19,14 +19,15 @@
         <!-- Cart -->
         <div id="cart"> <a href="#" class="cart-link">Your Shopping Cart</a>
             <div class="cl">&nbsp;</div>
-            <span>Articles: <strong>4</strong></span> &nbsp;&nbsp; <span>Cost: <strong>$250.99</strong></span> </div>
+            <span>Articles: <strong>4</strong></span> &nbsp;&nbsp; <span>Cost: <strong>$250.99</strong></span>
+        </div>
         <!-- End Cart -->
         <!-- Navigation -->
         <div id="navigation">
             <ul>
-                <li><a href="<%=application.getContextPath() %>" class="active">Home</a></li>
+                <li><a href="<%=application.getContextPath() %>">Home</a></li>
                 <li><a href="<%=application.getContextPath() %>/login">Login</a></li>
-                <li><a href="<%=application.getContextPath() %>/login" class="active">My Account</a></li>
+                <li><a href="<%=application.getContextPath() %>/account">My Account</a></li>
                 <li><a href="#">The Store</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>

@@ -1,5 +1,8 @@
 package Model;
 
+import com.mysql.cj.xdevapi.JsonArray;
+
+import javax.servlet.http.Cookie;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -8,38 +11,61 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
 
-public class LoginModel implements LoginInterface {
+public class LoginModel {
     private String loginURL = "http://localhost:9090/auth/login";
     private String registerURL = "http://localhost:9090/accounts/register";
 
-    @Override
-    public String login(String username, String password) {
+
+    public Cookie login(String username, String password) {
         String request =
                 "{\n" +
                         "  \"username\": \"" + username + "\",\n" +
                         "  \"password\": \"" + password + "\"\n" +
                         "}";
         String response = "";
+
         try {
            response = doPost(request, loginURL);
+
         } catch (Exception e){
             e.printStackTrace();
+            return null;
         }
-        return response;
+
+        String token = parse(response);
+        if (token == null) {
+            return null;
+        }
+        Cookie cookie = new Cookie("token", token);
+        cookie.setMaxAge(30);
+        return cookie;
     }
 
-    @Override
+
     public String register(String username, String password) {
         String request =
                 "{\n" +
                         "  \"username\": \"" + username + "\",\n" +
                         "  \"password\": \"" + password + "\"\n" +
                         "}";
-        return null;
+
+        String response = "";
+        try {
+            response = doPost(request, registerURL);
+
+        } catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return response;
     }
 
-    @Override
+
     public String doPost(String string, String stringUrl) throws Exception {
         String response= "";
         int code = 0;
@@ -68,8 +94,19 @@ public class LoginModel implements LoginInterface {
 
         } catch (Exception e) {
             e.printStackTrace();
-            response += code;
+            throw new Exception();
+            //response += code;
         }
         return response;
+    }
+
+    private String parse(String response) {
+        String token = null;
+        Object obj = JSONValue.parse(response);
+
+        JSONObject jsonObj = (JSONObject)obj;
+        token = (String)jsonObj.get("token");
+
+        return token;
     }
 }

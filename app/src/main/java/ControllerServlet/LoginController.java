@@ -31,26 +31,22 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
         LoginModel login = new LoginModel();
-        String response = login.login(username, password);
-        req.setAttribute("msg", response);
-        //req.getRequestDispatcher("login.jsp").forward(req,resp);
+        Cookie cookie = login.login(username, password);
 
-
-        if (true) {
-            HttpSession session = req.getSession();
-            session.setAttribute("username", username);
-            session.setAttribute("token", "test");
-            //session.setAttribute("id", id);
-            //session.setAttribute("role", role);
-
-            req.getRequestDispatcher("account.jsp").forward(req,resp);
-        } else {
+        if (cookie == null) {
             req.setAttribute("msg", "error: bad credentials");
             req.getRequestDispatcher("login.jsp").forward(req,resp);
+
+        } else {
+            HttpSession session = req.getSession();
+            session.setAttribute("username", username);
+            resp.addCookie(cookie);
+            req.getRequestDispatcher("/account").forward(req,resp);
         }
 
     }
