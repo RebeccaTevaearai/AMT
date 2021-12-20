@@ -1,3 +1,4 @@
+<%@ page import="service.CartService" %>
 <head>
     <title>Shop Around</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -17,10 +18,10 @@
     <div id="header">
         <h1 id="logo"><a href="#">shoparound</a></h1>
         <!-- Cart -->
-        <div id="cart"> <a href="#" class="cart-link">Your Shopping Cart</a>
+        <div id="cart"> <a href="<%=application.getContextPath() %>/cart" class="cart-link">Votre panier</a>
             <div class="cl">&nbsp;</div>
-            <span>Articles: <strong>4</strong></span> &nbsp;&nbsp; <span>Cost: <strong>$250.99</strong></span>
-        </div>
+            <% CartService cartService = (CartService) request.getAttribute("cartService");%>
+            <span>Articles: <strong><%=cartService.articlesQuantity()%></strong></span> &nbsp;&nbsp; <span>Cost: <strong><%=cartService.total()%> CHF</strong></span> </div>
         <!-- End Cart -->
         <!-- Navigation -->
         <div id="navigation">

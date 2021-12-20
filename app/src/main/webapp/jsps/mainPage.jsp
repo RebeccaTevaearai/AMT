@@ -1,5 +1,5 @@
-<%@ page import="Data.Category" %>
-<%@ page import="Data.Article" %>
+<%@ page import="data.Category" %>
+<%@ page import="data.Article" %>
 <%@ page import="java.util.ArrayList" %>
 <!-- Main -->
   <div id="main">
@@ -30,7 +30,7 @@
           <% }for(Article article : articles){ %>
 
 
-          <li><a href="<%=application.getContextPath() %>/article?id=<%= article.getId() %>">
+          <li><a href="<%=application.getContextPath() %>/articles/<%= article.getId() %>">
             <img src="css/images<% if(!article.getImages().isEmpty()){ %><%=article.getImages().get(0).getPath()%><% }else{ %><%="/default.png"%><% } %>"
             salt="" /></a>
             <div class="product-info">
@@ -45,6 +45,11 @@
                 </h4>
                 <p><%= article.getDescription() %></p>
                 <strong class="price"><%= article.getPrice() %> CHF</strong> </div>
+                <form name="addToCartSubmit" method="post" action="<%=application.getContextPath() %>/cart">
+                  <input name="id" value="<%=article.getId()%>" hidden>
+                  <input name="quantity" value="1" hidden/>
+                  <button class="button" type="submit">Ajouter au panier</button>
+                </form>
             </div>
           </li>
           <% } %>
