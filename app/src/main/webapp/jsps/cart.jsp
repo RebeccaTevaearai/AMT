@@ -18,6 +18,12 @@
 
 	function deleteArticle(id)
 	{
+		let totalArticle = document.getElementById("total"+id).innerHTML;
+		let total = document.getElementById("total").innerHTML;
+		total = parseFloat(total) - parseFloat(totalArticle);
+		let fees =parseFloat(document.getElementById("fees").innerHTML);
+		document.getElementById("total").innerHTML = (total).toFixed(1) + " CHF";
+		document.getElementById("totalWithFees").innerHTML = (total+fees).toFixed(1) + " CHF";
 		let article = document.getElementById(id);
 		article.parentNode.removeChild(article);
 	}
