@@ -39,6 +39,11 @@
                 </li>
             <%}%>
         </ul>
+        <form name="addToCartSubmit" method="post" action="<%=application.getContextPath() %>/cart">
+            <input name="id" value="<%=article.getId()%>" hidden>
+            <input id="quantity" type="number" class="" name="quantity" min="1" value="1" size="4"/>
+            <button class="button" type="submit">Ajouter au panier</button>
+        </form>
         <%}else {%>
         <%="L'article recherché n'existe pas"%>
         <% }%>
