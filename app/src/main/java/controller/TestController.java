@@ -28,8 +28,6 @@ public class TestController extends HttpServlet {
         SessionManager.initSession(session);
         req.setAttribute("cartService", session.getAttribute("cartService"));
 
-        session.setAttribute("redirection", "account.jsp");
-        req.getRequestDispatcher("/session").forward(req, resp);
-        //req.getRequestDispatcher("account.jsp").forward(req,resp);
+        req.getRequestDispatcher("test.jsp").forward(req,resp);
     }
 }

@@ -30,7 +30,7 @@ public class SessionController extends HttpServlet {
         req.setAttribute("cartService", session.getAttribute("cartService"));
 
         if (session.getAttribute("redirection") == null) {
-            req.getRequestDispatcher("/").forward(req, resp);
+            req.getRequestDispatcher("/test").forward(req, resp);
         } else {
 
             String redirection = session.getAttribute("redirection").toString();
