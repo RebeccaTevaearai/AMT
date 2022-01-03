@@ -1,2 +1,49 @@
-package controller;public class RegisterController {
+package controller;
+
+import service.LoginModel;
+import service.SessionManager;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+@WebServlet(name = "registerServlet", value = "/register")
+public class RegisterController extends HttpServlet {
+    @Override
+    public void init() throws ServletException {
+        super.init();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        SessionManager.initSession(session);
+        req.setAttribute("cartService", session.getAttribute("cartService"));
+
+        req.getRequestDispatcher("register.jsp").forward(req,resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        SessionManager.initSession(session);
+        req.setAttribute("cartService", session.getAttribute("cartService"));
+
+        // get form parameters
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+
+        LoginModel login = new LoginModel();
+
+        if (login.register(username, password)) {
+            req.setAttribute("msg", "success: account created");
+            req.getRequestDispatcher("/login").forward(req,resp);
+        } else {
+            req.setAttribute("msg", "error: bad credentials");
+        }
+
+        req.getRequestDispatcher("register.jsp").forward(req,resp);
+
+    }
 }

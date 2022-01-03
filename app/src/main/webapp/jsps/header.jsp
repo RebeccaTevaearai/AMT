@@ -1,6 +1,6 @@
 <%@ page import="service.CartService" %>
 <head>
-    <title>Shop Around</title>
+    <title>PECHEUR</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="<%=application.getContextPath() %>/css/style.css" type="text/css" rel="stylesheet" media="all">
     <link href="<%=application.getContextPath() %>/css/cart.css" type="text/css" rel="stylesheet" media="all">
@@ -28,8 +28,8 @@
             <ul>
                 <li><a href="<%=application.getContextPath() %>">Home</a></li>
                 <li><a href="<%=application.getContextPath() %>/login">Login</a></li>
-                <li><a href="<%=application.getContextPath() %>/account">My Account</a></li>
-                <li><a href="#">The Store</a></li>
+                <li><a href="<%=application.getContextPath() %>/acc">My Account</a></li>
+                <li><a href="<%=application.getContextPath() %>/test">The Test</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </div>

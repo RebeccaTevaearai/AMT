@@ -1,6 +1,9 @@
 package controller;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import service.LoginModel;
+import service.SessionManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,31 +25,41 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("logout") != null) {
-            HttpSession session = req.getSession(false);
-            session.invalidate();
-        }
+        HttpSession session = req.getSession();
+        SessionManager.initSession(session);
+        req.setAttribute("cartService", session.getAttribute("cartService"));
+
         req.getRequestDispatcher("login.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        SessionManager.initSession(session);
+        req.setAttribute("cartService", session.getAttribute("cartService"));
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
         LoginModel login = new LoginModel();
-        Cookie cookie = login.login(username, password);
+        String loginResponse = login.login(username, password);
 
-        if (cookie == null) {
+        if (loginResponse == null) {
             req.setAttribute("msg", "error: bad credentials");
             req.getRequestDispatcher("login.jsp").forward(req,resp);
 
         } else {
-            HttpSession session = req.getSession();
+            Object obj = JSONValue.parse(loginResponse);
+            JSONObject jsonObj = (JSONObject)obj;
+
+            String jwt = (String)jsonObj.get("token");
+
             session.setAttribute("username", username);
-            resp.addCookie(cookie);
-            req.getRequestDispatcher("/account").forward(req,resp);
+            session.setAttribute("jwt", jwt);
+
+            //req.getRequestDispatcher("/account").forward(req,resp);
+            session.setAttribute("redirection", "account.jsp");
+            req.getRequestDispatcher("/session").forward(req, resp);
         }
 
     }

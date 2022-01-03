@@ -1,6 +1,7 @@
 package controller;
 
 import service.LoginModel;
+import service.SessionManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,16 +25,31 @@ public class SessionController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    req.getRequestDispatcher("account.jsp").forward(req, resp);
+        HttpSession session = req.getSession();
+        SessionManager.initSession(session);
+        req.setAttribute("cartService", session.getAttribute("cartService"));
+
+        if (session.getAttribute("redirection") == null) {
+            req.getRequestDispatcher("/").forward(req, resp);
+        } else {
+
+            String redirection = session.getAttribute("redirection").toString();
+
+            if (session.getAttribute("jwt") == null) {
+                req.getRequestDispatcher("/").forward(req, resp);
+
+            } else {
+
+                String jwt = session.getAttribute("jwt").toString();
+
+                // if jwt is valid, perform the redirection. Else redirect to main page
+                if (SessionManager.checkJWT(jwt)) {
+                    req.getRequestDispatcher(redirection).forward(req, resp);
+                } else {
+                    req.getRequestDispatcher("/").forward(req, resp);
                 }
             }
         }
-
-        req.getRequestDispatcher("/").forward(req, resp);
     }
 
 }

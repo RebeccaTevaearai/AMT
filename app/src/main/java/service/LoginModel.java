@@ -1,73 +1,99 @@
 package service;
 
-import com.mysql.cj.xdevapi.JsonArray;
-
 import javax.servlet.http.Cookie;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
+
 
 public class LoginModel {
     private String loginURL = "http://localhost:9090/auth/login";
     private String registerURL = "http://localhost:9090/accounts/register";
 
-
-    public Cookie login(String username, String password) {
+    /**
+     * login function
+     *
+     * @param username : the username
+     * @param password : the password
+     *
+     * @return the response body if valid,
+     *         null if invalid
+     */
+    public String login(String username, String password) {
         String request =
                 "{\n" +
                         "  \"username\": \"" + username + "\",\n" +
                         "  \"password\": \"" + password + "\"\n" +
                         "}";
-        String response = "";
+        String[] response;
 
         try {
            response = doPost(request, loginURL);
-
         } catch (Exception e){
             e.printStackTrace();
             return null;
         }
 
-        String token = parse(response);
-        if (token == null) {
+        // return null in case of invalid credential
+        if (Integer.parseInt(response[1]) != 200) {
             return null;
         }
-        Cookie cookie = new Cookie("token", token);
-        return cookie;
+
+        return response[0];
     }
 
-
-    public String register(String username, String password) {
+    /**
+     * register function
+     *
+     * @param username : the username
+     * @param password : the password
+     *
+     * @return
+     */
+    public Boolean register(String username, String password) {
         String request =
                 "{\n" +
                         "  \"username\": \"" + username + "\",\n" +
                         "  \"password\": \"" + password + "\"\n" +
                         "}";
 
-        String response = "";
+        String[] response;
         try {
             response = doPost(request, registerURL);
 
         } catch (Exception e){
             e.printStackTrace();
-
+            return false;
         }
-        return response;
+
+        // return false in case of invalid credential
+        if (Integer.parseInt(response[1]) != 201) {
+            return false;
+        }
+
+        return true;
     }
 
+    /**
+     * Perform a post request to the given url
+     *
+     * @param string : the request
+     * @param stringUrl : the destination url
+     *
+     * @return a String[] array,
+     *          array[0] = the post response
+     *          array[1] = the response code
+     *
+     * @throws Exception
+     */
+    public String[] doPost(String string, String stringUrl) throws Exception {
+        String[] response = {"", ""};
 
-    public String doPost(String string, String stringUrl) throws Exception {
-        String response= "";
-        int code = 0;
         try {
             URL url = new URL(stringUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -82,30 +108,27 @@ public class LoginModel {
             os.flush();
             os.close();
 
-            code = con.getResponseCode();
+            response[1] = Integer.toString(con.getResponseCode());
+
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
             StringBuilder res = new StringBuilder();
             String responseLine = null;
             while ((responseLine = br.readLine()) != null) {
                 res.append(responseLine.trim());
             }
-            response = res.toString();
+            response[0] = res.toString();
 
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception();
-            //response += code;
         }
         return response;
     }
 
-    private String parse(String response) {
-        String token = null;
+    public String parse(String response) {
         Object obj = JSONValue.parse(response);
-
         JSONObject jsonObj = (JSONObject)obj;
-        token = (String)jsonObj.get("token");
 
-        return token;
+        return (String)jsonObj.get("token");
     }
 }
