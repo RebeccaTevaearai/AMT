@@ -58,6 +58,10 @@ jobs:
           cd app
           mvn -B package --file pom.xml
      
+      # RENAME APP
+      - name: rename war
+        run: mv app/target/proj-1.0-SNAPSHOT.war app/target/pecheur.war
+        
       # RELEASE
       - name: create release
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -67,4 +71,21 @@ jobs:
           title: "${{ steps.semver.outputs.tag }}"         
           prerelease: false
           # Release title; defaults to the tag name if none specified.
-          files: app/target/proj-1.0-SNAPSHOT.war
+          files: app/target/pecheur.war
+     
+      - name: Set SSH keys
+        run: |
+          touch key.pem
+          echo "${{ secrets.AMT_DMZ_KEY }}" > key.pem
+          chmod 400 key.pem
+          touch key2.pem
+          echo "${{ secrets.AMT_KEY }}" > key2.pem
+          chmod 400 key2.pem
+                      
+      - name: SSH + Deploying
+        run: |
+          echo "port forwarding..."
+          sudo ssh -tt -o StrictHostKeyChecking=no -fN -L 5432:${{ secrets.AMT_IP }}:22 ${{ secrets.AMT_DMZ_USERNAME }}@${{ secrets.AMT_DMZ_IP }} -i key.pem
+          echo "Deploying to AWS..."
+          sudo scp -o StrictHostKeyChecking=no -i key2.pem -P 5432 my-app/target/pecheur.war ${{ secrets.AMT_USERNAME }}@localhost:/var/lib/tomcat9/webapps
+          
