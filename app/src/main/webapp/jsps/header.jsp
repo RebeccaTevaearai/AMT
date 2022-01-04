@@ -28,8 +28,8 @@
             <ul>
                 <li><a href="<%=application.getContextPath() %>">Home</a></li>
                 <li><a href="<%=application.getContextPath() %>/login">Login</a></li>
-                <li><a href="<%=application.getContextPath() %>/acc">My Account</a></li>
-                <li><a href="<%=application.getContextPath() %>/test">The Test</a></li>
+                <li><a href="<%=application.getContextPath() %>/accounttt">My Account</a></li>
+                <li><a href="<%=application.getContextPath() %>/testttt">The Test</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </div>

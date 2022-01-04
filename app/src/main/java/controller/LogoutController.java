@@ -21,18 +21,10 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    // delete cookie
-                    cookie.setMaxAge(0);
-                }
-            }
-        }
+        HttpSession session = req.getSession();
+        session.invalidate();
+        //session.setAttribute();
+        req.getRequestDispatcher("/login").forward(req, resp);
 
-        // delete session attribute ?
-
-        req.getRequestDispatcher("/").forward(req, resp);
     }
 }

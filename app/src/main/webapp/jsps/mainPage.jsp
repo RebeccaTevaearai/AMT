@@ -60,6 +60,7 @@
     </div>
     <!-- End Content -->
     <!-- Sidebar -->
+
     <div id="sidebar">
       <!-- Search -->
       <div class="box search">

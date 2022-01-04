@@ -1,5 +1,9 @@
 
+<%@ page import="service.SessionManager" %>
 
+<% if (!SessionManager.checkJWT(session.getAttribute("jwt").toString())) {
+    request.getRequestDispatcher("/tes");
+}%>
 <br>
 <h1>Account creation</h1>
 <br>

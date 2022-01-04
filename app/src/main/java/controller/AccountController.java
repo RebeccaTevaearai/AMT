@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet (name = "accountServlet", value = "/acc")
+@WebServlet (name = "accountServlet", value = "/accounttt")
 public class AccountController extends HttpServlet {
 
     @Override
@@ -29,8 +29,10 @@ public class AccountController extends HttpServlet {
         SessionManager.initSession(session);
         req.setAttribute("cartService", session.getAttribute("cartService"));
 
-        //session.setAttribute("redirection", "account.jsp");
-        //req.getRequestDispatcher("/session").forward(req, resp);
-        req.getRequestDispatcher("account.jsp").forward(req, resp);
+        if (SessionManager.isSessionValid(session, "user")) {
+            req.getRequestDispatcher("account.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/login").forward(req, resp);
+        }
     }
 }
