@@ -12,14 +12,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Controller that manage articles details
+ */
 @WebServlet(name = "articleDetailedServlet", urlPatterns = "/articles/*")
 public class ArticleDetailedController extends HttpServlet {
 
+    /**
+     * ArticleDetailedController init
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         super.init();
     }
 
+    /**
+     * Get article's details
+     * @param req Servlet request
+     * @param resp Servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();

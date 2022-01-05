@@ -8,8 +8,16 @@ import java.io.StringReader;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Articles related SQL queries
+ */
 public class ArticleQueries implements ArticleInterface{
 
+    /**
+     * Get article by id
+     * @param id Article id
+     * @return The aticle
+     */
     @Override
     public Article getArticleById(Long id){
         Article article = null;
@@ -36,7 +44,11 @@ public class ArticleQueries implements ArticleInterface{
         return article;
     }
 
-
+    /**
+     * Get articles by categories
+     * @param categories Categories array to use as a filter
+     * @return Articles list
+     */
     @Override
     public ArrayList<Article> getArticleByCatergories(ArrayList<Category> categories) {
 
