@@ -3,6 +3,9 @@ package service;
 import data.Category;
 import java.util.ArrayList;
 
+/**
+ * Category inteface
+ */
 public interface CategoryInterface {
     /***
      * @return toutes les categories null si vide

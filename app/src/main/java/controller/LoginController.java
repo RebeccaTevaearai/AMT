@@ -12,14 +12,28 @@ import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.http.Cookie;
 
+/**
+ * Servlet that manage the login
+ */
 @WebServlet(name = "loginServlet", value = "/login")
 public class LoginController extends HttpServlet {
 
+    /**
+     * LoginController init
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         super.init();
     }
 
+    /**
+     *
+     * @param req Servlet request
+     * @param resp Servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("logout") != null) {
@@ -29,6 +43,13 @@ public class LoginController extends HttpServlet {
         req.getRequestDispatcher("login.jsp").forward(req,resp);
     }
 
+    /**
+     *
+     * @param req Servlet request
+     * @param resp Servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
