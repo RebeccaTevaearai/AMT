@@ -14,8 +14,19 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Controller that manage the cart
+ */
 @WebServlet(name = "cartServlet", urlPatterns = "/cart")
 public class CartController extends HttpServlet {
+
+    /**
+     * Get cart data
+     * @param req Servlet request
+     * @param resp Servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -25,6 +36,13 @@ public class CartController extends HttpServlet {
         req.getRequestDispatcher("./jsps/cart.jsp").forward(req,resp);
     }
 
+    /**
+     * Add articles to cart
+     * @param req Servlet request
+     * @param resp Servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
