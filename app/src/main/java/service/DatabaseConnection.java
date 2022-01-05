@@ -3,6 +3,9 @@ package service;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Class that manage database connexion
+ */
 public class DatabaseConnection {
 
     private static Connection connection;
@@ -11,6 +14,9 @@ public class DatabaseConnection {
     private static final String USER = "root";
     private static final String PWD = "12345";
 
+    /**
+     * Constructor
+     */
     private DatabaseConnection() {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
@@ -21,6 +27,10 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Get the database connexion
+     * @return The connexion
+     */
     public static Connection getConnection() {
         if(instance == null)
         {
@@ -30,6 +40,13 @@ public class DatabaseConnection {
         return connection;
     }
 
+    /**
+     * Execute specified query
+     * @param query Query
+     * @param params List of params
+     * @return Query result
+     * @throws SQLException
+     */
     public static ResultSet doQuery(String query, ArrayList<String> params) throws SQLException {
         PreparedStatement st = getConnection().prepareStatement(query);
 

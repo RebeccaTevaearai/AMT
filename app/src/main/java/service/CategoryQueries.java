@@ -5,8 +5,15 @@ import data.Category;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+/**
+ * Category related SQL queries
+ */
 public class CategoryQueries implements CategoryInterface {
 
+    /**
+     * Get all categories
+     * @return Categories list
+     */
     @Override
     public ArrayList<Category> getAllCategory() {
         Category category = null;
@@ -24,6 +31,11 @@ public class CategoryQueries implements CategoryInterface {
         return categories;
     }
 
+    /**
+     * Get category by name
+     * @param name Category name
+     * @return Category
+     */
     @Override
     public Category getCategoryByName(String name) {
         Category category = null;
@@ -40,6 +52,11 @@ public class CategoryQueries implements CategoryInterface {
         return category;
     }
 
+    /**
+     * Get article categories.
+     * @param idArticle Article id
+     * @return Categories list
+     */
     @Override
     public ArrayList<Category> getCategoryByArticleId(Long idArticle) {
         ArrayList<Category> categories = new ArrayList<>();

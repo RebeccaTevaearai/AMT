@@ -12,16 +12,34 @@ import java.io.IOException;
  */
 @WebServlet (name = "SessionServlet", value = "/session")
 public class SessionController extends HttpServlet {
+    /**
+     * SessionController init
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         super.init();
     }
 
+    /**
+     *
+     * @param req Servlet request
+     * @param resp Servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
 
+    /**
+     *
+     * @param req Servlet request
+     * @param resp Servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cookie[] cookies = req.getCookies();
