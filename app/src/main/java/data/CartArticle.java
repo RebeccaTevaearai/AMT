@@ -1,7 +1,7 @@
 package data;
 
 /**
- * Article in the cart
+ * Class that represent article in cart
  */
 public class CartArticle {
     private Article article;
