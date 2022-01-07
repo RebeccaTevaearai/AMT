@@ -6,16 +6,13 @@ import service.LoginService;
 import service.AuthorizationService;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-
-@WebServlet(name = "loginServlet", value = "/loginn")
-public class LoginController extends HttpServlet {
+public class CheckLoginController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
@@ -24,15 +21,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
-
-        if (session.getAttribute("jwt") != null) {
-            req.setAttribute("msg", "You are already logged");
-        }
-
-        req.getRequestDispatcher("login.jsp").forward(req,resp);
+        doPost(req, resp);
     }
 
     @Override
@@ -44,11 +33,12 @@ public class LoginController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        String loginResponse = LoginService.login(username, password);
+        LoginService login = new LoginService();
+        String loginResponse = login.login(username, password);
 
         if (loginResponse == null) {
             req.setAttribute("msg", "error: bad credentials");
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/login").forward(req,resp);
 
         } else {
             Object obj = JSONValue.parse(loginResponse);
@@ -56,7 +46,7 @@ public class LoginController extends HttpServlet {
 
             if (jsonObj == null) {
                 req.setAttribute("msg", "error: bad credentials");
-                req.getRequestDispatcher("login.jsp").forward(req,resp);
+                req.getRequestDispatcher("/login").forward(req,resp);
             }
 
             String jwt = (String)jsonObj.get("token");
@@ -66,6 +56,5 @@ public class LoginController extends HttpServlet {
 
             req.getRequestDispatcher("/accounttt").forward(req,resp);
         }
-
     }
 }

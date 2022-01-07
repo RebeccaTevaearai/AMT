@@ -1,9 +1,6 @@
 package controller;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import service.LoginModel;
-import service.SessionManager;
+import service.AuthorizationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet (name = "test", value = "/testttt")
+@WebServlet (name = "test", value = "/test")
 public class Test2 extends HttpServlet {
 
     @Override
@@ -23,39 +20,25 @@ public class Test2 extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        SessionManager.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
-
-        req.getRequestDispatcher("login.jsp").forward(req,resp);
+        doPost(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        SessionManager.initSession(session);
+        AuthorizationService.initSession(session);
         req.setAttribute("cartService", session.getAttribute("cartService"));
 
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
+        try {
+            if (AuthorizationService.isUserAllowed("test.jsp", session.getAttribute("jwt").toString())) {
+                req.getRequestDispatcher("test.jsp").forward(req, resp);
+            }
+            req.setAttribute("msg", "error: access denied");
+            req.getRequestDispatcher("/").forward(req, resp);
 
-        LoginModel login = new LoginModel();
-        String loginResponse = login.login(username, password);
-
-        if (loginResponse == null) {
-            req.setAttribute("msg", "error: bad credentials");
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
-
-        } else {
-            Object obj = JSONValue.parse(loginResponse);
-            JSONObject jsonObj = (JSONObject)obj;
-
-            String jwt = (String)jsonObj.get("token");
-
-            session.setAttribute("username", username);
-            session.setAttribute("jwt", jwt);
-
-            req.getRequestDispatcher("acc").forward(req,resp);
+        } catch (Exception e) {
+            req.setAttribute("msg", "error: access denied");
+            req.getRequestDispatcher("/").forward(req, resp);
         }
 
     }

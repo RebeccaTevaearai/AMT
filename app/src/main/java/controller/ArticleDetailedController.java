@@ -2,7 +2,7 @@ package controller;
 
 import data.Article;
 import service.ArticleQueries;
-import service.SessionManager;
+import service.AuthorizationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +23,7 @@ public class ArticleDetailedController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        SessionManager.initSession(session);
+        AuthorizationService.initSession(session);
         req.setAttribute("cartService", session.getAttribute("cartService"));
 
         String[] stringId = req.getPathInfo().split("/");

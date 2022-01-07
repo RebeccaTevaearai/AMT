@@ -4,7 +4,7 @@ import data.Article;
 import data.Category;
 import service.ArticleQueries;
 import service.CategoryQueries;
-import service.SessionManager;
+import service.AuthorizationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -32,7 +32,7 @@ public class ArticleController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        SessionManager.initSession(session);
+        AuthorizationService.initSession(session);
         req.setAttribute("cartService", session.getAttribute("cartService"));
 
         ArticleQueries articleQueries = new ArticleQueries();

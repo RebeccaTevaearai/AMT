@@ -1,6 +1,6 @@
 package controller;
 
-import service.SessionManager;
+import service.AuthorizationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,13 +26,20 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        SessionManager.initSession(session);
+        AuthorizationService.initSession(session);
         req.setAttribute("cartService", session.getAttribute("cartService"));
 
-        if (SessionManager.isSessionValid(session, "user")) {
-            req.getRequestDispatcher("account.jsp").forward(req, resp);
-        } else {
-            req.getRequestDispatcher("/login").forward(req, resp);
+        try {
+            if (AuthorizationService.isUserAllowed("account.jsp", session.getAttribute("jwt").toString())) {
+                req.getRequestDispatcher("account.jsp").forward(req, resp);
+
+            }
+            req.setAttribute("msg", "error: access denied");
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
+
+        } catch (Exception e) {
+            req.setAttribute("msg", "error: token not valid");
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }
 }

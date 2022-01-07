@@ -22,9 +22,10 @@ public class LogoutController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        session.invalidate();
-        //session.setAttribute();
-        req.getRequestDispatcher("/login").forward(req, resp);
+        //session.invalidate();
+        session.removeAttribute("username");
+        session.removeAttribute("jwt");
+        req.getRequestDispatcher("/loginn").forward(req, resp);
 
     }
 }

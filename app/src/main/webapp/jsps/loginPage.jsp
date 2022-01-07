@@ -3,7 +3,7 @@
 <br>
 <h1>Login</h1>
 <br>
-<form action="${pageContext.request.contextPath}/login" method="POST">
+<form action="${pageContext.request.contextPath}/loginn" method="POST">
     <label>Username</label><br>
     <input type="text" name="username"><br>
     <label>Password</label><br>

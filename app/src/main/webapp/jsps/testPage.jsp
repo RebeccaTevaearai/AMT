@@ -1,9 +1,3 @@
-
-<%@ page import="service.SessionManager" %>
-
-<% if (!SessionManager.checkJWT(session.getAttribute("jwt").toString())) {
-    request.getRequestDispatcher("/").forward(request, response);
-}%>
 <br>
 <h1>Test Page</h1>
 <br>
