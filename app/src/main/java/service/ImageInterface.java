@@ -4,6 +4,9 @@ import data.Image;
 
 import java.util.ArrayList;
 
+/**
+ * Image interface
+ */
 public interface ImageInterface {
     /***
      * @param idArticle

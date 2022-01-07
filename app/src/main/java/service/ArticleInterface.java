@@ -5,6 +5,9 @@ import data.Category;
 
 import java.util.ArrayList;
 
+/**
+ * Articles interface
+ */
 public interface ArticleInterface {
     /***
      * @param categories Tableau des catégories à filter

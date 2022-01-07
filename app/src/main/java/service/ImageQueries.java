@@ -5,8 +5,16 @@ import data.Image;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+/**
+ * Image related SQL queries
+ */
 public class ImageQueries implements ImageInterface {
 
+    /**
+     * Get article images
+     * @param idArticle Article id
+     * @return List of images
+     */
     @Override
     public ArrayList<Image> getImageByArticleId(Long idArticle)
     {

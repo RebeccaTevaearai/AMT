@@ -16,18 +16,31 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * Controller that manage the articles
+ */
 @WebServlet(name = "articleServlet", urlPatterns = "/home",
 initParams = {
         @WebInitParam(name = "categories", value = "")
 })
 public class ArticleController extends HttpServlet {
 
+    /**
+     * ArticleController init
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         super.init();
     }
 
+    /**
+     * Get articles by categories
+     * @param req Servlet request
+     * @param resp Servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
