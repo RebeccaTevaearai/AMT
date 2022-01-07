@@ -10,41 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+@WebServlet (name = "test", value = "/test")
+public class Test2 extends HttpServlet {
 
-/**
- * Controller that manage the user account
- */
-@WebServlet (name = "AccountServlet", value = "/account")
-public class AccountController extends HttpServlet {
-
-    /**
-     * AccountController init
-     * @throws ServletException
-     */
     @Override
     public void init() throws ServletException {
         super.init();
     }
 
-    /**
-     *
-     * @param req Servlet request
-     * @param resp Servlet response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doPost(req, resp);
+        doPost(req, resp);
     }
 
-    /**
-     *
-     * @param req Servlet request
-     * @param resp Servlet response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -52,16 +30,16 @@ public class AccountController extends HttpServlet {
         req.setAttribute("cartService", session.getAttribute("cartService"));
 
         try {
-            if (AuthorizationService.isUserAllowed("account.jsp", session.getAttribute("jwt").toString())) {
-                req.getRequestDispatcher("account.jsp").forward(req, resp);
-
+            if (AuthorizationService.isUserAllowed("test.jsp", session.getAttribute("jwt").toString())) {
+                req.getRequestDispatcher("test.jsp").forward(req, resp);
             }
             req.setAttribute("msg", "error: access denied");
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/").forward(req, resp);
 
         } catch (Exception e) {
-            req.setAttribute("msg", "error: token not valid");
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            req.setAttribute("msg", "error: access denied");
+            req.getRequestDispatcher("/").forward(req, resp);
         }
+
     }
 }
