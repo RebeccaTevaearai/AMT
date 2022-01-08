@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class ArticleQueriesTest {
 
     @Test
-    void getArticleByName() {
+    public void getArticleByName() {
 
 
     }
