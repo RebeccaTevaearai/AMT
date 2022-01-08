@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test the ArticleQueries class
  */
-class ArticleQueriesTest {
+public class ArticleQueriesTest {
 
     @Test
     void getArticleByName() {
