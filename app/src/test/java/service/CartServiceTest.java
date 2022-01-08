@@ -9,8 +9,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CartServiceTest {
+/**
+ * Test CartService class
+ */
+public class CartServiceTest {
 
+    /**
+     * Check if the total() method return the right amount
+     */
     @Test
     void total() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
@@ -23,6 +29,9 @@ class CartServiceTest {
         assertEquals(43.4,cartService.total());
     }
 
+    /**
+     * Check if new articles are really added to the cart
+     */
     @Test
     void addArticle() {
         final int QUANTITY = 2;
@@ -52,6 +61,9 @@ class CartServiceTest {
 
     }
 
+    /**
+     * Check if deleteArticle() method really delete article from cart
+     */
     @Test
     void deleteArticle() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
@@ -77,6 +89,9 @@ class CartServiceTest {
         assertFalse(isIn);
     }
 
+    /**
+     * Check if updateQuantity() method update quantity with desired value
+     */
     @Test
     void updateQuantity() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
