@@ -18,7 +18,7 @@ public class DatabaseConnectionTest {
      * the database must be available.
      */
     @Test
-    void getConnection() {
+    public void getConnection() {
         Connection conn = DatabaseConnection.getConnection();
 
         assertNotNull(conn);
