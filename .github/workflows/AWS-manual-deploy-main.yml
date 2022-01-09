@@ -1,4 +1,4 @@
-name: Manual deploy to AWS
+name: Manual deploy main branch to AWS
 
 on: 
   workflow_dispatch:
