@@ -33,12 +33,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       # FOOTER
-      - name: Update vernum footer
       - uses: actions/checkout@v2
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
-      - name: Create local changes
+      - name: Update vernum footer
         run: |
           sed -i 's/AMT v.* /AMT ${{ steps.semver.outputs.tag }} /' my-app/src/main/webapp/jsps/footer.jsp
       - name: Commit files
