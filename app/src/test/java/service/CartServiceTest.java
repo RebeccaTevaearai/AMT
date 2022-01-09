@@ -9,10 +9,16 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CartServiceTest {
+/**
+ * Test CartService class
+ */
+public class CartServiceTest {
 
+    /**
+     * Check if the total() method return the right amount
+     */
     @Test
-    void total() {
+    public void total() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
         Article article2 = new Article(2,"article2","desc",21,15.6, new ArrayList<>(), new ArrayList<>());
         CartService cartService = new CartService(new ArrayList<CartArticle>() {{
@@ -23,8 +29,11 @@ class CartServiceTest {
         assertEquals(43.4,cartService.total());
     }
 
+    /**
+     * Check if new articles are really added to the cart
+     */
     @Test
-    void addArticle() {
+    public void addArticle() {
         final int QUANTITY = 2;
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
         Article article2 = new Article(2,"article2","desc",21,15.6, new ArrayList<>(), new ArrayList<>());
@@ -52,8 +61,11 @@ class CartServiceTest {
 
     }
 
+    /**
+     * Check if deleteArticle() method really delete article from cart
+     */
     @Test
-    void deleteArticle() {
+    public void deleteArticle() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
         Article article2 = new Article(2,"article2","desc",21,15.6, new ArrayList<>(), new ArrayList<>());
         CartService cartService = new CartService(new ArrayList<CartArticle>() {{
@@ -77,8 +89,11 @@ class CartServiceTest {
         assertFalse(isIn);
     }
 
+    /**
+     * Check if updateQuantity() method update quantity with desired value
+     */
     @Test
-    void updateQuantity() {
+    public void updateQuantity() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
         CartService cartService = new CartService(new ArrayList<CartArticle>() {{
             add(new CartArticle(article1, 1));
