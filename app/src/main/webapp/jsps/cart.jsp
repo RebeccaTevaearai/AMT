@@ -2,6 +2,8 @@
 <%@ page import="data.CartArticle" %>
 <%@include file="header.jsp"%>
 <script>
+	let nbElement = <%=cartService.getArticles().size()%>;
+
 	function updateTotal(id){
 		let quantity = document.getElementById("quantity"+id).value;
 		let price = document.getElementById("price"+id).innerHTML;
@@ -15,7 +17,7 @@
 		document.getElementById("total"+id).innerHTML = (totalDouble).toFixed(1) + " CHF";
 		document.getElementById("totalWithFees").innerHTML = (total+fees).toFixed(1) + " CHF";
 	}
-
+	let parent;
 	function deleteArticle(id)
 	{
 		let totalArticle = document.getElementById("total"+id).innerHTML;
@@ -25,7 +27,17 @@
 		document.getElementById("total").innerHTML = (total).toFixed(1) + " CHF";
 		document.getElementById("totalWithFees").innerHTML = (total+fees).toFixed(1) + " CHF";
 		let article = document.getElementById(id);
-		article.parentNode.removeChild(article);
+		console.log(nbElement);
+		if(nbElement === 1)
+		{
+			parent = article.parentNode.parentNode.parentNode;
+			parent.removeChild(article.parentNode.parentNode);
+			parent.appendChild(document.createTextNode('Votre panier est vide'));
+
+		}else{
+			article.parentNode.removeChild(article);
+		}
+		nbElement--;
 	}
 </script>
 			<!-- Main -->
@@ -35,40 +47,43 @@
 					<%if(cartService.getArticles().isEmpty()){%>
 					<%="Votre panier est vide"%>
 					<%}else{%>
-					<div class="listArticles">
-						<table id="summary">
-							<tr>
-								<th class="title">Article</th>
-								<th class="title">Prix</th>
-								<th class="title">Quantité</th>
-								<th class="title">Total</th>
-								<th class="title">Action</th>
-							</tr>
-
-							<%for(CartArticle cartArticle : cartService.getArticles()){%>
-								<tr id="<%=cartArticle.getArticle().getId()%>">
-									<td class="cartImg">
-										<section class="articleName"><%=cartArticle.getArticle().getName()%></section>
-										<section class="articleImgCont">
-											<% %>
-											<img class="articleImg" src="<%=application.getContextPath() %>/css/images/<% if(!cartArticle.getArticle().getImages().isEmpty()){ %><%=cartArticle.getArticle().getImages().get(0).getPath()%><% }else{ %><%="/default.png"%><% } %>" alt="image">
-										</section>
-									</td>
-									<td><p id="price<%=cartArticle.getArticle().getId()%>"><%=cartArticle.getArticle().getPrice()%> CHF</p></td>
-									<td>
-										<input id="quantity<%=cartArticle.getArticle().getId()%>" onchange="updateTotal(<%=cartArticle.getArticle().getId()%>)" type="number" class="" name="quantity" min="1" max="10" value="<%=cartArticle.getQuantity()%>" size="4"/>
-									</td>
-									<td>
-										<p id="total<%=cartArticle.getArticle().getId()%>"><%=cartArticle.getArticle().getPrice()*cartArticle.getQuantity()%> CHF</p>
-									</td>
-									<td>
-										<button class="button delButn" onclick="deleteArticle(<%=cartArticle.getArticle().getId()%>)" type="submit" value="Supprimer"/>
-									</td>
+					<form method="post" action="<%=application.getContextPath() %>/cart/update">
+						<div class="listArticles">
+							<table id="summary">
+								<tr>
+									<th class="title">Article</th>
+									<th class="title">Prix</th>
+									<th class="title">Quantité</th>
+									<th class="title">Total</th>
+									<th class="title">Action</th>
 								</tr>
-							<%}%>
-						</table>
 
-					</div>
+								<%for(CartArticle cartArticle : cartService.getArticles()){%>
+									<tr id="<%=cartArticle.getArticle().getId()%>">
+										<td class="cartImg">
+											<section class="articleName"><%=cartArticle.getArticle().getName()%></section>
+											<section class="articleImgCont">
+												<% %>
+												<img class="articleImg" src="<%=application.getContextPath() %>/css/images/<% if(!cartArticle.getArticle().getImages().isEmpty()){ %><%=cartArticle.getArticle().getImages().get(0).getPath()%><% }else{ %><%="/default.png"%><% } %>" alt="image">
+											</section>
+										</td>
+										<td><p id="price<%=cartArticle.getArticle().getId()%>"><%=cartArticle.getArticle().getPrice()%> CHF</p></td>
+										<td>
+											<input id="quantity<%=cartArticle.getArticle().getId()%>" name="quantity<%=cartArticle.getArticle().getId()%>" onchange="updateTotal(<%=cartArticle.getArticle().getId()%>)" type="number" class="" name="quantity" min="1" max="10" value="<%=cartArticle.getQuantity()%>" size="4"/>
+										</td>
+										<td>
+											<p id="total<%=cartArticle.getArticle().getId()%>"><%=cartArticle.getArticle().getPrice()*cartArticle.getQuantity()%> CHF</p>
+										</td>
+										<td>
+											<button class="button delButn" onclick="deleteArticle(<%=cartArticle.getArticle().getId()%>)" type="submit" value="Supprimer"/>
+										</td>
+									</tr>
+								<%}%>
+							</table>
+						</div>
+
+						<button class="button checkoutBtn" type="submit" >Enregister</button>
+					</form>
 					<div class="checkout">
 						<table>
 							<tr>

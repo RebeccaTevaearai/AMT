@@ -2,7 +2,10 @@ package service;
 
 import data.Article;
 import data.CartArticle;
+import data.Category;
+import data.Image;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -15,9 +18,34 @@ public class CartQueries {
      * @param idAccount Account id
      * @return Articles list
      */
-    public ArrayList<CartArticle> getArticles(long idAccount)
+    public ArrayList<CartArticle> getArticles(Long idAccount)
     {
-        return new ArrayList<>();
+        ArrayList<CartArticle> articles = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM `isincartof` INNER JOIN `Article` ON `isincartof`.`id_Article` = `Article`.`id`" +
+                    "WHERE `isincartof`.`id_Account` = ?";
+
+            ResultSet resultSet = DatabaseConnection.doQuery(query, new ArrayList<>() {{
+                add(idAccount.toString());
+            }});
+
+            while (resultSet.next()){
+                long idArticle = resultSet.getLong("Article.id");
+                ArrayList<Image> images  = new ImageQueries().getImageByArticleId(idArticle);
+
+                ArrayList<Category> articleCategories = new CategoryQueries().getCategoryByArticleId(idArticle);
+
+                articles.add(new CartArticle(new Article(idArticle,resultSet.getString("Article.name")
+                        ,resultSet.getString("description"),resultSet.getLong("quantity")
+                        ,resultSet.getDouble("price"),articleCategories,images),resultSet.getInt("Quantity")));
+            }
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return articles;
     }
 
     /**
@@ -27,9 +55,23 @@ public class CartQueries {
      * @param quantity Quantity
      * @return A boolean that indicated if the process was successful or not
      */
-    public boolean addArticle(long idAccount, long idArticle, int quantity)
+    public boolean addArticle(Long idAccount, Long idArticle, Integer quantity)
     {
-        return false;
+        try {
+            String query = "INSERT INTO `pecheur`.`isincartof` (`id_Account`, `id_Article`, `Quantity`) VALUES (?, ?, ?);";
+
+            DatabaseConnection.doQueryUpdate(query, new ArrayList<>() {{
+                add(idAccount.toString());
+                add(idArticle.toString());
+                add(quantity.toString());
+            }});
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     /**
@@ -39,9 +81,23 @@ public class CartQueries {
      * @param quantity New quantity
      * @return A boolean that indicated if the process was successful or not
      */
-    public boolean updateArticle(long idAccount, long idArticle, int quantity)
+    public boolean updateArticle(Long idAccount, Long idArticle, Integer quantity)
     {
-        return false;
+        try {
+            String query = "UPDATE `pecheur`.`isincartof` SET `Quantity`=? WHERE  `id_Account`=? AND `id_Article`=?;";
+
+            DatabaseConnection.doQueryUpdate(query, new ArrayList<>() {{
+                add(quantity.toString());
+                add(idAccount.toString());
+                add(idArticle.toString());
+            }});
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     /**
@@ -50,8 +106,21 @@ public class CartQueries {
      * @param idArticle Article id
      * @return A boolean that indicated if the process was successful or not
      */
-    public boolean deleteArticle(long idAccount, long idArticle)
+    public boolean deleteArticle(Long idAccount, Long idArticle)
     {
-        return false;
+        try {
+            String query = "DELETE FROM `pecheur`.`isincartof` WHERE  `id_Account`=? AND `id_Article`=?;";
+
+            DatabaseConnection.doQueryUpdate(query, new ArrayList<>() {{
+                add(idAccount.toString());
+                add(idArticle.toString());
+            }});
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 }
