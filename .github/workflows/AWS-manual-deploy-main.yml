@@ -25,7 +25,7 @@ jobs:
         mvn -B package --file pom.xml
     
     - name: rename war
-        run: mv app/target/proj-1.0-SNAPSHOT.war app/target/pecheur.war
+      run: mv app/target/proj-1.0-SNAPSHOT.war app/target/pecheur.war
         
     - name: Set SSH keys
       run: |
