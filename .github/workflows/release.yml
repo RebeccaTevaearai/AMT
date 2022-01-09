@@ -1,0 +1,93 @@
+# https://github.com/marketplace/actions/semver-release
+# Assuming that a PR is tagged with a "semver-compliant" label (patch, minor or major), then this action can create a tag and a GitHub release when it is merged.
+
+name: Create release
+
+on:
+  pull_request:
+    branches: main
+    # on.pull_request.closed , it is designed that whenever the PR is closed the workflow will be triggered.
+    types: closed 
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:   
+      - uses: actions/checkout@v2
+      
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: maven
+      # NEW TAG  
+      - name: Compute next SemVer tag
+        id: semver
+        uses: K-Phoen/semver-release-action@master
+        with:
+          release_branch: main
+          release_strategy: none
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # FOOTER
+      - name: Update vernum footer
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      - name: Create local changes
+        run: |
+          sed -i 's/AMT v.* /AMT ${{ steps.semver.outputs.tag }} /' my-app/src/main/webapp/jsps/footer.jsp
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      
+      # BUILD
+      - name: Build with Maven
+        run: |
+          cd app
+          mvn -B package --file pom.xml
+     
+      # RENAME APP
+      - name: rename war
+        run: mv app/target/proj-1.0-SNAPSHOT.war app/target/pecheur.war
+        
+      # RELEASE
+      - name: create release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with: 
+          repo_token: ${{ secrets.GITHUB_TOKEN }}        
+          automatic_release_tag: "${{ steps.semver.outputs.tag }}"
+          title: "${{ steps.semver.outputs.tag }}"         
+          prerelease: false
+          # Release title; defaults to the tag name if none specified.
+          files: app/target/pecheur.war
+     
+      - name: Set SSH keys
+        run: |
+          touch key.pem
+          echo "${{ secrets.AMT_DMZ_KEY }}" > key.pem
+          chmod 400 key.pem
+          touch key2.pem
+          echo "${{ secrets.AMT_KEY }}" > key2.pem
+          chmod 400 key2.pem
+                      
+      - name: SSH + Deploying
+        run: |
+          echo "port forwarding..."
+          sudo ssh -tt -o StrictHostKeyChecking=no -fN -L 5432:${{ secrets.AMT_IP }}:22 ${{ secrets.AMT_DMZ_USERNAME }}@${{ secrets.AMT_DMZ_IP }} -i key.pem
+          echo "Changing war perms..."
+          sudo ssh -tt -o StrictHostKeyChecking=no -f -p 5432 -i key2.pem ${{ secrets.AMT_USERNAME }}@localhost 'sudo chmod g+w /var/lib/tomcat9/webapps/pecheur.war'
+          echo "Deploying to AWS..."
+          sudo scp -o StrictHostKeyChecking=no -i key2.pem -P 5432 my-app/target/pecheur.war ${{ secrets.AMT_USERNAME }}@localhost:/var/lib/tomcat9/webapps
+          
