@@ -38,5 +38,5 @@ jobs:
         echo "port forwarding..."
         sudo ssh -tt -o StrictHostKeyChecking=no -fN -L 5432:${{ secrets.AMT_IP }}:22 ${{ secrets.AMT_DMZ_USERNAME }}@${{ secrets.AMT_DMZ_IP }} -i key.pem
         echo "Deploying to AWS..."
-        sudo ssh -tt -o StrictHostKeyChecking=no -f -p 5432 -i key2.pem ${{ secrets.AMT_USERNAME }}@$localhost 'chmod g+w proj-1.0-SNAPSHOT.war 2>/dev/null'
+        sudo ssh -tt -o StrictHostKeyChecking=no -f -p 5432 -i key2.pem ${{ secrets.AMT_USERNAME }}@localhost 'chmod g+w proj-1.0-SNAPSHOT.war 2>/dev/null'
         sudo scp -o StrictHostKeyChecking=no -i key2.pem -P 5432 app/target/proj-1.0-SNAPSHOT.war ${{ secrets.AMT_USERNAME }}@localhost:/var/lib/tomcat9/webapps
