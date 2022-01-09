@@ -35,6 +35,14 @@ public class Article {
         this.categories = categories;
     }
 
+    public Article(long id, String name, String description, long quantity, double price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     /**
      * Default constructor
      */

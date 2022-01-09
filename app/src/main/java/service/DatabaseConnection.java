@@ -12,7 +12,7 @@ public class DatabaseConnection {
     private static DatabaseConnection instance;
     private static final String URL = "jdbc:mysql://localhost:3306/pecheur?serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PWD = "12345";
+    private static final String PWD = "";
 
     /**
      * Constructor
@@ -58,5 +58,25 @@ public class DatabaseConnection {
         }
 
       return st.executeQuery();
+    }
+
+    /**
+     * Execute specified query
+     * @param query Query
+     * @param params List of params
+     * @return Query result
+     * @throws SQLException
+     */
+    public static void doQueryUpdate(String query, ArrayList<String> params) throws SQLException {
+        PreparedStatement st = getConnection().prepareStatement(query);
+
+        int nbParam = 1;
+        for(String param : params)
+        {
+            st.setString(nbParam, param);
+            nbParam++;
+        }
+
+        st.executeUpdate();
     }
 }

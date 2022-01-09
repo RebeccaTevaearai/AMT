@@ -52,6 +52,6 @@ public class CartController extends HttpServlet {
                 Integer.parseInt(req.getParameter("quantity"))
         );
 
-        resp.sendRedirect(req.getRequestURI());
+        resp.sendRedirect(req.getContextPath() + "/cart");
     }
 }

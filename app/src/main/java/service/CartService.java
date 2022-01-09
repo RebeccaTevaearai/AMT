@@ -1,5 +1,6 @@
 package service;
 
+import com.mysql.cj.Session;
 import data.Account;
 import data.Article;
 import data.CartArticle;
@@ -20,6 +21,22 @@ public class CartService {
      */
     public CartService(ArrayList<CartArticle> articles){
         this.articles = articles;
+    }
+
+    /**
+     *
+     */
+    public boolean sync()
+    {
+        if(account != null) {
+            AccountQueries accountQueries = new AccountQueries();
+            if (accountQueries.getAccountById(account.getId()) == null) {
+                accountQueries.createAccount(account.getId(), account.getEmail(), account.getRole());
+            } else {
+                articles = new CartQueries().getArticles(account.getId());
+            }
+        }
+        return true;
     }
 
     /**
