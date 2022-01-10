@@ -22,8 +22,8 @@ public class CartQueries {
     {
         ArrayList<CartArticle> articles = new ArrayList<>();
         try {
-            String query = "SELECT * FROM `isInCartOf` INNER JOIN `Article` ON `isincartof`.`id_Article` = `Article`.`id`" +
-                    "WHERE `isincartof`.`id_Account` = ?";
+            String query = "SELECT * FROM `isInCartOf` INNER JOIN `Article` ON `isInCartOf`.`id_Article` = `Article`.`id`" +
+                    "WHERE `isInCartOf`.`id_Account` = ?";
 
             ResultSet resultSet = DatabaseConnection.doQuery(query, new ArrayList<>() {{
                 add(idAccount.toString());
