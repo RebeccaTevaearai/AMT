@@ -2,13 +2,10 @@ package service;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * Test the ArticleQueries class
- */
-public class ArticleQueriesTest {
+class ArticleQueriesTest {
 
     @Test
-    public void getArticleByName() {
+    void getArticleByName() {
 
 
     }
