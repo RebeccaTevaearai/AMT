@@ -43,7 +43,7 @@ public class LogoutController extends HttpServlet {
         //session.invalidate();
         session.removeAttribute("username");
         session.removeAttribute("jwt");
-        req.getRequestDispatcher("/loginn").forward(req, resp);
+        req.getRequestDispatcher("/login").forward(req, resp);
 
     }
 }
