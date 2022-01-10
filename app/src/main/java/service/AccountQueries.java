@@ -36,7 +36,7 @@ public class AccountQueries {
     {
         Account account = null;
         try {
-            DatabaseConnection.doQueryUpdate("INSERT INTO `pecheur`.`account` (`id`, `email`, `role`) VALUES (?, ?, ?);",
+            DatabaseConnection.doQueryUpdate("INSERT INTO `Account` (`id`, `email`, `role`) VALUES (?, ?, ?);",
                     new ArrayList<String>() {{ add(id.toString()); add(email); add(role); }});
 
         }catch (Exception e)
