@@ -9,16 +9,10 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Test CartService class
- */
-public class CartServiceTest {
+class CartServiceTest {
 
-    /**
-     * Check if the total() method return the right amount
-     */
     @Test
-    public void total() {
+    void total() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
         Article article2 = new Article(2,"article2","desc",21,15.6, new ArrayList<>(), new ArrayList<>());
         CartService cartService = new CartService(new ArrayList<CartArticle>() {{
@@ -29,11 +23,8 @@ public class CartServiceTest {
         assertEquals(43.4,cartService.total());
     }
 
-    /**
-     * Check if new articles are really added to the cart
-     */
     @Test
-    public void addArticle() {
+    void addArticle() {
         final int QUANTITY = 2;
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
         Article article2 = new Article(2,"article2","desc",21,15.6, new ArrayList<>(), new ArrayList<>());
@@ -61,11 +52,8 @@ public class CartServiceTest {
 
     }
 
-    /**
-     * Check if deleteArticle() method really delete article from cart
-     */
     @Test
-    public void deleteArticle() {
+    void deleteArticle() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
         Article article2 = new Article(2,"article2","desc",21,15.6, new ArrayList<>(), new ArrayList<>());
         CartService cartService = new CartService(new ArrayList<CartArticle>() {{
@@ -89,11 +77,8 @@ public class CartServiceTest {
         assertFalse(isIn);
     }
 
-    /**
-     * Check if updateQuantity() method update quantity with desired value
-     */
     @Test
-    public void updateQuantity() {
+    void updateQuantity() {
         Article article1 = new Article(1,"article1","desc",12,12.2, new ArrayList<>(), new ArrayList<>());
         CartService cartService = new CartService(new ArrayList<CartArticle>() {{
             add(new CartArticle(article1, 1));
