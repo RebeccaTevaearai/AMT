@@ -1,5 +1,7 @@
 package controller;
 
+import service.AuthorizationService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -43,6 +45,8 @@ public class LogoutController extends HttpServlet {
         //session.invalidate();
         session.removeAttribute("username");
         session.removeAttribute("jwt");
+        AuthorizationService.resetCart(session);
+
         req.getRequestDispatcher("/login").forward(req, resp);
 
     }

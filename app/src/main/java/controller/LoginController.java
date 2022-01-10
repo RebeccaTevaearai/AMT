@@ -1,7 +1,9 @@
 package controller;
 
+import data.Account;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import service.CartService;
 import service.LoginService;
 import service.AuthorizationService;
 
@@ -81,9 +83,13 @@ public class LoginController extends HttpServlet {
             }
 
             String jwt = (String)jsonObj.get("token");
+            JSONObject account = (JSONObject) jsonObj.get("account");
+
 
             session.setAttribute("username", username);
             session.setAttribute("jwt", jwt);
+
+            AuthorizationService.setCartAccount(session,account);
 
             req.getRequestDispatcher("/account").forward(req,resp);
         }
