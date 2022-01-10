@@ -22,7 +22,7 @@ public class CartQueries {
     {
         ArrayList<CartArticle> articles = new ArrayList<>();
         try {
-            String query = "SELECT * FROM `isincartof` INNER JOIN `Article` ON `isincartof`.`id_Article` = `Article`.`id`" +
+            String query = "SELECT * FROM `isInCartOf` INNER JOIN `Article` ON `isincartof`.`id_Article` = `Article`.`id`" +
                     "WHERE `isincartof`.`id_Account` = ?";
 
             ResultSet resultSet = DatabaseConnection.doQuery(query, new ArrayList<>() {{
@@ -58,7 +58,7 @@ public class CartQueries {
     public boolean addArticle(Long idAccount, Long idArticle, Integer quantity)
     {
         try {
-            String query = "INSERT INTO `pecheur`.`isincartof` (`id_Account`, `id_Article`, `Quantity`) VALUES (?, ?, ?);";
+            String query = "INSERT INTO `isInCartOf` (`id_Account`, `id_Article`, `Quantity`) VALUES (?, ?, ?);";
 
             DatabaseConnection.doQueryUpdate(query, new ArrayList<>() {{
                 add(idAccount.toString());
@@ -84,7 +84,7 @@ public class CartQueries {
     public boolean updateArticle(Long idAccount, Long idArticle, Integer quantity)
     {
         try {
-            String query = "UPDATE `pecheur`.`isincartof` SET `Quantity`=? WHERE  `id_Account`=? AND `id_Article`=?;";
+            String query = "UPDATE `isInCartOf` SET `Quantity`=? WHERE  `id_Account`=? AND `id_Article`=?;";
 
             DatabaseConnection.doQueryUpdate(query, new ArrayList<>() {{
                 add(quantity.toString());
@@ -109,7 +109,7 @@ public class CartQueries {
     public boolean deleteArticle(Long idAccount, Long idArticle)
     {
         try {
-            String query = "DELETE FROM `pecheur`.`isincartof` WHERE  `id_Account`=? AND `id_Article`=?;";
+            String query = "DELETE FROM `isInCartOf` WHERE  `id_Account`=? AND `id_Article`=?;";
 
             DatabaseConnection.doQueryUpdate(query, new ArrayList<>() {{
                 add(idAccount.toString());
