@@ -48,8 +48,6 @@ public class AccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
 
         try {
             if (AuthorizationService.isUserAllowed("account.jsp", session.getAttribute("jwt").toString())) {

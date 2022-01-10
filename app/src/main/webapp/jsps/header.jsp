@@ -1,4 +1,5 @@
 <%@ page import="service.CartService" %>
+<%@ page import="service.AuthorizationService" %>
 <head>
     <title>PECHEUR</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -20,7 +21,10 @@
         <!-- Cart -->
         <div id="cart"> <a href="<%=application.getContextPath() %>/cart" class="cart-link">Votre panier</a>
             <div class="cl">&nbsp;</div>
-            <% CartService cartService = (CartService) request.getAttribute("cartService");%>
+            <%
+                HttpSession s = request.getSession();
+                AuthorizationService.initSession(s);
+                CartService cartService = (CartService) s.getAttribute("cartService");%>
             <span>Articles: <strong><%=cartService.articlesQuantity()%></strong></span> &nbsp;&nbsp; <span>Cost: <strong><%=cartService.total()%> CHF</strong></span> </div>
         <!-- End Cart -->
         <!-- Navigation -->
