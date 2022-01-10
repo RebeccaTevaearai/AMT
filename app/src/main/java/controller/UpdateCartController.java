@@ -19,7 +19,6 @@ public class UpdateCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
         CartService cartService = ((CartService) session.getAttribute("cartService"));
 
         ArrayList<Article> toDel = new ArrayList<>();

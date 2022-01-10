@@ -45,8 +45,6 @@ public class ArticleController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
 
         ArticleQueries articleQueries = new ArticleQueries();
         CategoryQueries cm = new CategoryQueries();

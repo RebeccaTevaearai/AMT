@@ -18,8 +18,6 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
 
         req.getRequestDispatcher("register.jsp").forward(req,resp);
     }
@@ -27,8 +25,6 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
 
         // get form parameters
         String username = req.getParameter("username");
