@@ -1,5 +1,6 @@
 package service;
 
+import com.mysql.cj.Session;
 import data.Account;
 import data.Article;
 import data.CartArticle;
@@ -20,6 +21,22 @@ public class CartService {
      */
     public CartService(ArrayList<CartArticle> articles){
         this.articles = articles;
+    }
+
+    /**
+     *
+     */
+    public boolean sync()
+    {
+        if(account != null) {
+            AccountQueries accountQueries = new AccountQueries();
+            if (accountQueries.getAccountById(account.getId()) == null) {
+                accountQueries.createAccount(account.getId(), account.getEmail(), account.getRole());
+            } else {
+                articles = new CartQueries().getArticles(account.getId());
+            }
+        }
+        return true;
     }
 
     /**
@@ -59,6 +76,12 @@ public class CartService {
      */
     public ArrayList<CartArticle> addArticle(Article article, int quantity)
     {
+
+        if (!quantityIsOk(article.getId(),quantity))
+        {
+           return articles;
+        }
+
         for (CartArticle cartArticle : articles)
         {
             if(cartArticle.getArticle().getId() == article.getId())
@@ -105,6 +128,11 @@ public class CartService {
      */
     public ArrayList<CartArticle> updateQuantity(Article article, int quantity)
     {
+        if (!quantityIsOk(article.getId(),quantity))
+        {
+            return articles;
+        }
+
         for (CartArticle cartArticle : articles)
         {
             if(cartArticle.getArticle().getId() == article.getId())
@@ -119,6 +147,23 @@ public class CartService {
             new CartQueries().updateArticle(account.getId(),article.getId(),quantity);
         }
         return articles;
+    }
+
+
+    /**
+     * Verifie si la quantité demandée est disponible pour L'article (aucune réservation n'est faite)
+     * @param idArticle
+     * @param quantity
+     * @return true si la quantité est disponible, sinon false
+     */
+    private boolean quantityIsOk(long idArticle, int quantity)
+    {
+        Article article = new ArticleQueries().getArticleById(idArticle);
+
+        if(quantity > 0 && article.getQuantity() >= quantity)
+            return true;
+        else
+            return false;
     }
 
     /**
