@@ -1,3 +1,5 @@
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/RebeccaTevaearai/AMT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/RebeccaTevaearai/AMT/alerts/)
+
 # AMT 2021-22
 ## Introduction <br/>
 ToDo introduction
