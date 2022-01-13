@@ -64,7 +64,6 @@ public class DatabaseConnection {
      * Execute specified query
      * @param query Query
      * @param params List of params
-     * @return Query result
      * @throws SQLException
      */
     public static void doQueryUpdate(String query, ArrayList<String> params) throws SQLException {
