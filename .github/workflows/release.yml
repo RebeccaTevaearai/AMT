@@ -52,18 +52,18 @@ jobs:
           branch: ${{ github.ref }}
       
       # BUILD
-   #   - name: Build + javadoc
-    #    run: |
-     #     cd app
-      #    mvn -B package --file pom.xml
-       #   mvn javadoc:javadoc
+      - name: Build + javadoc
+        run: |
+          cd app
+          mvn -B package --file pom.xml
+          mvn javadoc:javadoc
       # mvn site -> public
       
-   #         - name: Deploy 🚀
-   #     uses: JamesIves/github-pages-deploy-action@v4.2.2
-   #     with:
-    #      branch: main # The branch the action should deploy to.
-     #     folder:  app/target/site/apidocs # The folder the action should deploy.
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: main # The branch the action should deploy to.
+          folder:  app/target/site/apidocs # The folder the action should deploy.
      
       # RENAME APP
       - name: rename war
