@@ -1,4 +1,6 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/RebeccaTevaearai/AMT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/RebeccaTevaearai/AMT/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/RebeccaTevaearai/AMT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/RebeccaTevaearai/AMT/context:javascript)
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/RebeccaTevaearai/AMT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/RebeccaTevaearai/AMT/context:java)
 
 # AMT 2021-22
 ## Introduction <br/>
