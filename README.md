@@ -48,5 +48,9 @@ MariaDB (https://mariadb.org/download)
 
 Le fichier sql de la base de donnée est sql/DB.sql
 
+### MicroService Authentification
+
+https://github.com/RebeccaTevaearai/AuthService
+
 ## MCD
 <img src="images/MCD.png" height="200" />
