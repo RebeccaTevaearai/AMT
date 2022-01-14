@@ -43,14 +43,34 @@ Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` <
 - Console admin: localhost:8080/manager/html
   - login: admin:admin  
 
+<br/>
+
 ### Bases de donnée
 MariaDB (https://mariadb.org/download)
 
-Le fichier sql de la base de donnée est sql/DB.sql
+Le fichier sql de la base de donnée est sql/DB.sql <br/>
 
-### MicroService Authentification
+<br/>
+
+### Javadoc  <br/>
+Génération de la javadoc: <br/>
+`mvn javadoc:javadoc` <br/>
+Le dossier se trouve dans `/target/site/apidocs`
+
+<br/>
+
+### Code coverage <br/>
+génération du rapport de code coverage (jacoco) <br/>
+`mvn jacoco:report` <br/>
+Le rapport se trouve dans `/target/site/apidocs/jacoco` <br/>
+
+<br/>
+
+## MicroService Authentification
 
 https://github.com/RebeccaTevaearai/AuthService
+
+<br/>
 
 ## MCD
 <img src="images/MCD.png" height="200" />
