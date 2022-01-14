@@ -6,7 +6,9 @@
 ## Introduction <br/>
 ToDo introduction
 
-ToDo insertion screenshot app
+<img alt="app img" src="images/app.png" height="400" />
+
+<br/>
 
 ## Backlog
 https://cloud.icescrum.com/p/PECHEUR/#/backlog/all/story/
