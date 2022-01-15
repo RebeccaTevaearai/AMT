@@ -39,9 +39,12 @@ public class ArticleDetailedController extends HttpServlet {
         HttpSession session = req.getSession();
 
         String[] stringId = req.getPathInfo().split("/");
+        int id = 0;
+        try {
+            id = Integer.parseInt(stringId[1]);
+        }catch (Exception e) {}
 
-        Integer id = Integer.parseInt(stringId[1]);
-        Article article = new ArticleQueries().getArticleById(id.longValue());
+        Article article = new ArticleQueries().getArticleById((long) id);
 
         req.setAttribute("article",article);
         req.getRequestDispatcher("../jsps/detailed.jsp").forward(req,resp);
