@@ -80,8 +80,9 @@ public class LoginController extends HttpServlet {
                 req.getRequestDispatcher("login.jsp").forward(req,resp);
             }
 
-            String jwt = "";
-            jwt = (String)jsonObj.get("token");
+            String jwt = (String)jsonObj.get("token");
+            if(jwt == null)
+                jwt = "";
             JSONObject account = (JSONObject) jsonObj.get("account");
 
 
