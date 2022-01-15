@@ -56,6 +56,26 @@ public class CategoryQueries implements CategoryInterface {
     }
 
     /**
+     * Get category by name
+     * @param id Category id
+     * @return Category
+     */
+    public Category getCategoryById(Long id) {
+        Category category = null;
+        try {
+            ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Category` WHERE `id` = ?",
+                    new ArrayList<String>() {{add(id.toString());}});
+
+            if(resultSet.next())
+                category = new Category(resultSet.getLong("id"), resultSet.getString("name"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
+
+    /**
      * Get article categories.
      * @param idArticle Article id
      * @return Categories list
@@ -80,7 +100,7 @@ public class CategoryQueries implements CategoryInterface {
     /**
      * Create a category.
      * @param name category's name
-     * @return boolean false if an error append else true
+     * @return A boolean that indicated if the process was successful or not
      */
     public boolean createCategory(String name)
     {
@@ -101,9 +121,9 @@ public class CategoryQueries implements CategoryInterface {
      * Update a category.
      * @param id category's id
      * @param name category's new name
-     * @return boolean false if an error append else true
+     * @return A boolean that indicated if the process was successful or not
      */
-    public boolean updateCatergory(Long id, String name)
+    public boolean updateCategory(Long id, String name)
     {
         try {
             DatabaseConnection.doQueryUpdate("UPDATE `Category` SET `name`=? WHERE id=?;",
@@ -121,9 +141,9 @@ public class CategoryQueries implements CategoryInterface {
     /**
      * Delete a category.
      * @param id category's id
-     * @return boolean false if an error append else true
+     * @return A boolean that indicated if the process was successful or not
      */
-    public boolean deleteCate(Long id)
+    public boolean deleteCategory(Long id)
     {
         try {
             DatabaseConnection.doQueryUpdate("DELETE FROM `Category` WHERE id=?;",
