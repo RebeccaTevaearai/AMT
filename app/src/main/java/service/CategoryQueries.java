@@ -1,7 +1,10 @@
 package service;
 
 
+import data.Account;
 import data.Category;
+
+import javax.servlet.http.PushBuilder;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -43,8 +46,8 @@ public class CategoryQueries implements CategoryInterface {
             ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Category` WHERE `name` = ?",
                     new ArrayList<String>() {{add(name);}});
 
-            resultSet.next();
-            category = new Category(resultSet.getLong("id"), resultSet.getString("name"));
+            if(resultSet.next())
+                category = new Category(resultSet.getLong("id"), resultSet.getString("name"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,12 +68,73 @@ public class CategoryQueries implements CategoryInterface {
                     "INNER JOIN `isDefineBy` ON `isDefineBy`.`id_Category` = `Category`.`id` WHERE `isDefineBy`.`id_Article` = ?",
                     new ArrayList<String>() {{add(idArticle.toString());}});
 
-            resultSet.next();
-            categories.add(new Category(resultSet.getLong("id"), resultSet.getString("name")));
+            while(resultSet.next())
+                categories.add(new Category(resultSet.getLong("id"), resultSet.getString("name")));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return categories;
+    }
+
+    /**
+     * Create a category.
+     * @param name category's name
+     * @return boolean false if an error append else true
+     */
+    public boolean createCategory(String name)
+    {
+        try {
+            DatabaseConnection.doQueryUpdate("INSERT INTO `Category` (`name`) VALUES (?);",
+                    new ArrayList<String>() {{ add(name); }});
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Update a category.
+     * @param id category's id
+     * @param name category's new name
+     * @return boolean false if an error append else true
+     */
+    public boolean updateCatergory(Long id, String name)
+    {
+        try {
+            DatabaseConnection.doQueryUpdate("UPDATE `Category` SET `name`=? WHERE id=?;",
+                    new ArrayList<String>() {{ add(id.toString()); add(name); }});
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Delete a category.
+     * @param id category's id
+     * @return boolean false if an error append else true
+     */
+    public boolean deleteCate(Long id)
+    {
+        try {
+            DatabaseConnection.doQueryUpdate("DELETE FROM `Category` WHERE id=?;",
+                    new ArrayList<String>() {{ add(id.toString()); }});
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 }

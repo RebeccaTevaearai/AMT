@@ -34,7 +34,6 @@ public class AccountQueries {
 
     public boolean createAccount(Long id, String email, String role)
     {
-        Account account = null;
         try {
             DatabaseConnection.doQueryUpdate("INSERT INTO `Account` (`id`, `email`, `role`) VALUES (?, ?, ?);",
                     new ArrayList<String>() {{ add(id.toString()); add(email); add(role); }});
