@@ -78,20 +78,18 @@ public class LoginController extends HttpServlet {
             if (jsonObj == null) {
                 req.setAttribute("msg", "error: bad credentials");
                 req.getRequestDispatcher("login.jsp").forward(req,resp);
+            }else{
+                String jwt = (String)jsonObj.get("token");
+                JSONObject account = (JSONObject) jsonObj.get("account");
+
+
+                session.setAttribute("username", username);
+                session.setAttribute("jwt", jwt);
+
+                AuthorizationService.setCartAccount(session,account);
+
+                req.getRequestDispatcher("/account").forward(req,resp);
             }
-
-            String jwt = (String)jsonObj.get("token");
-            if(jwt == null)
-                jwt = "";
-            JSONObject account = (JSONObject) jsonObj.get("account");
-
-
-            session.setAttribute("username", username);
-            session.setAttribute("jwt", jwt);
-
-            AuthorizationService.setCartAccount(session,account);
-
-            req.getRequestDispatcher("/account").forward(req,resp);
         }
 
     }
