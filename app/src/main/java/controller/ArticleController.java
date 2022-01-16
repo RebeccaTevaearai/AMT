@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 @WebServlet(name = "articleServlet", urlPatterns = "/home",
 initParams = {
-        @WebInitParam(name = "categories", value = "")
+        @WebInitParam(name = "category", value = "")
 })
 public class ArticleController extends HttpServlet {
 
@@ -44,13 +44,11 @@ public class ArticleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
-
         ArticleQueries articleQueries = new ArticleQueries();
         CategoryQueries cm = new CategoryQueries();
 
         ArrayList<Category> categories = cm.getAllCategory();
-        String filter = req.getParameter("categories");
+        String filter = req.getParameter("category");
         ArrayList<Category> categoriesFilter = new ArrayList<>();
         if(filter != null) {
             for (String s : filter.split(";")) {

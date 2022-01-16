@@ -27,10 +27,10 @@ public class AdminCategoryDeleteController extends HttpServlet {
             } catch (Exception e) {
             }
 
-            req.getRequestDispatcher("../jsps/categories.jsp").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/categories");
         }else{
             req.setAttribute("msg", "error: access denied");
-            req.getRequestDispatcher("/").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/home");
         }
     }
 

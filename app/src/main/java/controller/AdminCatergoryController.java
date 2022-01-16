@@ -32,7 +32,7 @@ public class AdminCatergoryController extends HttpServlet {
             req.getRequestDispatcher("../jsps/category.jsp").forward(req, resp);
         }else{
             req.setAttribute("msg", "error: access denied");
-            req.getRequestDispatcher("/").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/home");
         }
     }
 
@@ -45,7 +45,7 @@ public class AdminCatergoryController extends HttpServlet {
         else
             new CategoryQueries().createCategory(req.getParameter("name"));
 
-        req.getRequestDispatcher("../jsps/categories.jsp").forward(req,resp);
+        resp.sendRedirect(req.getContextPath() + "/categories");
     }
 
     private boolean checkAuth(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

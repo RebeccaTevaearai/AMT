@@ -25,7 +25,7 @@ public class AdminCategoriesController extends HttpServlet {
             req.getRequestDispatcher("../jsps/categories.jsp").forward(req, resp);
         }else{
             req.setAttribute("msg", "error: access denied");
-            req.getRequestDispatcher("/").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/home");
         }
     }
 

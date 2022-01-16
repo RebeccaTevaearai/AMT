@@ -35,7 +35,7 @@
                 <li><a href="<%=application.getContextPath() %>/account">My Account</a></li>
                 <li><a href="<%=application.getContextPath() %>/test">The Test</a></li>
 
-                <% if(cartService.getAccount() != null && cartService.getAccount().getRole() == "admin"){%>
+                <% if(cartService.getAccount() != null && cartService.getAccount().getRole().equals("admin")){%>
                     <li><a href="<%=application.getContextPath() %>/categories">Gestion des categories</a></li>
                 <%}%>
                 <li><a href="#">Contact</a></li>
