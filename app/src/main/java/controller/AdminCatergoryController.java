@@ -29,7 +29,7 @@ public class AdminCatergoryController extends HttpServlet {
             }
 
             req.setAttribute("category", category);
-            req.getRequestDispatcher("../jsps/category.jsp").forward(req, resp);
+            req.getRequestDispatcher("../WEB-INF/jsps/category.jsp").forward(req, resp);
         }else{
             req.setAttribute("msg", "error: access denied");
             resp.sendRedirect(req.getContextPath() + "/home");
