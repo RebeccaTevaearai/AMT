@@ -32,4 +32,14 @@
     <input type="submit" value="Submit">
 </form>
 <br>
+<h2>Add an Category to an Article</h2>
+<br>
+<form class="formulaire" action="${pageContext.request.contextPath}/articleCategory" method="POST">
+    <label>Article id</label><br>
+    <input type="number" name="idArticle"><br>
+    <label>Category id</label> <br>
+    <input type="number" name="idCategory"> <br><br>
+    <input type="submit" value="Submit">
+</form>
+<br>
 
