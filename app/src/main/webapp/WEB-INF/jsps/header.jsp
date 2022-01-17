@@ -30,15 +30,13 @@
         <!-- Navigation -->
         <div id="navigation">
             <ul>
-                <li><a href="<%=application.getContextPath() %>">Home</a></li>
-                <li><a href="<%=application.getContextPath() %>/login">Login</a></li>
+                <li><a href="<%=application.getContextPath() %>/home">Home</a></li>
+                <li><a href="<%=application.getContextPath() %>/loginpage">Login</a></li>
                 <li><a href="<%=application.getContextPath() %>/account">My Account</a></li>
-                <li><a href="<%=application.getContextPath() %>/test">The Test</a></li>
-
                 <% if(cartService.getAccount() != null && cartService.getAccount().getRole().equals("admin")){%>
                     <li><a href="<%=application.getContextPath() %>/categories">Gestion des categories</a></li>
+                    <li><a href="<%=application.getContextPath() %>/management">Admin page</a></li>
                 <%}%>
-                <li><a href="#">Contact</a></li>
             </ul>
         </div>
         <!-- End Navigation -->

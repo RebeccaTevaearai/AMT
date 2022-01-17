@@ -63,6 +63,6 @@ public class ArticleController extends HttpServlet {
         req.setAttribute("categories", categories);
         req.setAttribute("articles", articles);
 
-        req.getRequestDispatcher("./index.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/index.jsp").forward(req,resp);
     }
 }

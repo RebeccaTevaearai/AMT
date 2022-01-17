@@ -51,15 +51,15 @@ public class AccountController extends HttpServlet {
 
         try {
             if (AuthorizationService.isUserAllowed("account.jsp", session.getAttribute("jwt").toString())) {
-                req.getRequestDispatcher("account.jsp").forward(req, resp);
-
+                req.getRequestDispatcher("WEB-INF/account.jsp").forward(req, resp);
             }
+
             req.setAttribute("msg", "error: access denied");
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/loginpage").forward(req, resp);
 
         } catch (Exception e) {
             req.setAttribute("msg", "error: token not valid");
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/loginpage").forward(req, resp);
         }
     }
 }

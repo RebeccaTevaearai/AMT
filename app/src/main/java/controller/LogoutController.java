@@ -47,7 +47,7 @@ public class LogoutController extends HttpServlet {
         session.removeAttribute("jwt");
         AuthorizationService.resetCart(session);
 
-        req.getRequestDispatcher("/login").forward(req, resp);
+        req.getRequestDispatcher("/loginPage").forward(req, resp);
 
     }
 }
