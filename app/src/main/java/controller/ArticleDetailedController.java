@@ -37,9 +37,12 @@ public class ArticleDetailedController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] stringId = req.getPathInfo().split("/");
+        int id = 0;
+        try {
+            id = Integer.parseInt(stringId[1]);
+        }catch (Exception e) {}
 
-        Integer id = Integer.parseInt(stringId[1]);
-        Article article = new ArticleQueries().getArticleById(id.longValue());
+        Article article = new ArticleQueries().getArticleById((long) id);
 
         req.setAttribute("article",article);
         req.getRequestDispatcher("../jsps/detailed.jsp").forward(req,resp);

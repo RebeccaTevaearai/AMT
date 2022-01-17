@@ -77,5 +77,6 @@ public class DatabaseConnection {
         }
 
         st.executeUpdate();
+        st.close();
     }
 }

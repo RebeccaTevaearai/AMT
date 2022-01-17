@@ -17,8 +17,7 @@ public class AccountQueries {
             ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Account` WHERE `id` = ?",
                     new ArrayList<String>() {{ add(id.toString()); }});
 
-            resultSet.next();
-            if(resultSet != null)
+            if(resultSet.next())
                 account = new Account(resultSet.getLong("id"),resultSet.getString("email"),
                         resultSet.getString("role"));
             else{
