@@ -36,8 +36,6 @@ public class ArticleDetailedController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-
         String[] stringId = req.getPathInfo().split("/");
         int id = 0;
         try {

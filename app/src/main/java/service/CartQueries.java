@@ -69,6 +69,7 @@ public class CartQueries {
         }catch (Exception e)
         {
             e.printStackTrace();
+            return false;
         }
 
         return true;
@@ -95,6 +96,7 @@ public class CartQueries {
         }catch (Exception e)
         {
             e.printStackTrace();
+            return false;
         }
 
         return true;
@@ -119,6 +121,7 @@ public class CartQueries {
         }catch (Exception e)
         {
             e.printStackTrace();
+            return false;
         }
 
         return true;
