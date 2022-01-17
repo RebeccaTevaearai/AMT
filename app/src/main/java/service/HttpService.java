@@ -51,6 +51,7 @@ public class HttpService {
                 res.append(responseLine.trim());
             }
             response[0] = res.toString();
+            br.close();
 
             return response;
 

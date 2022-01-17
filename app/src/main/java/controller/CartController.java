@@ -29,10 +29,8 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
 
-        req.getRequestDispatcher("./jsps/cart.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/jsps/cart.jsp").forward(req,resp);
     }
 
     /**
@@ -45,7 +43,6 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
 
         ((CartService) session.getAttribute("cartService")).addArticle(
                 new ArticleQueries().getArticleById((long) Integer.parseInt(req.getParameter("id"))),

@@ -1,9 +1,7 @@
 package controller;
 
-import data.Account;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import service.CartService;
 import service.LoginService;
 import service.AuthorizationService;
 
@@ -40,15 +38,7 @@ public class LoginController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
-
-        if (session.getAttribute("jwt") != null) {
-            req.setAttribute("msg", "You are already logged");
-        }
-
-        req.getRequestDispatcher("login.jsp").forward(req,resp);
+        doPost(req, resp);
     }
 
     /**
@@ -61,8 +51,6 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -71,7 +59,7 @@ public class LoginController extends HttpServlet {
 
         if (loginResponse == null) {
             req.setAttribute("msg", "error: bad credentials");
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/loginpage").forward(req,resp);
 
         } else {
             Object obj = JSONValue.parse(loginResponse);
@@ -79,20 +67,19 @@ public class LoginController extends HttpServlet {
 
             if (jsonObj == null) {
                 req.setAttribute("msg", "error: bad credentials");
-                req.getRequestDispatcher("login.jsp").forward(req,resp);
+
+                req.getRequestDispatcher("/loginpage").forward(req,resp);
             }
 
             String jwt = (String)jsonObj.get("token");
             JSONObject account = (JSONObject) jsonObj.get("account");
-
-
             session.setAttribute("username", username);
             session.setAttribute("jwt", jwt);
 
             AuthorizationService.setCartAccount(session,account);
 
             req.getRequestDispatcher("/account").forward(req,resp);
-        }
 
+        }
     }
 }

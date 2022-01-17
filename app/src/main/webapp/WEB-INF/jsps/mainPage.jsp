@@ -97,7 +97,7 @@
           <ul>
             <% ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
               for(Category category : categories){ %>
-            <li value="<%= category.getId() %>"><a href="?categories=<%= category.getName() %>"><%= category.getName() %></a></li>
+            <li value="<%= category.getId() %>"><a href="?category=<%= category.getName() %>"><%= category.getName() %></a></li>
             <% } %>
           </ul>
         </div>

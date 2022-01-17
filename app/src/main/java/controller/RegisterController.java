@@ -17,18 +17,11 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
-
-        req.getRequestDispatcher("register.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/register.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        AuthorizationService.initSession(session);
-        req.setAttribute("cartService", session.getAttribute("cartService"));
 
         // get form parameters
         String username = req.getParameter("username");
@@ -36,12 +29,12 @@ public class RegisterController extends HttpServlet {
 
         if (LoginService.register(username, password)) {
             req.setAttribute("msg", "success: account created");
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/loginPage").forward(req,resp);
         } else {
             req.setAttribute("msg", "error: bad credentials");
         }
 
-        req.getRequestDispatcher("register.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/register.jsp").forward(req,resp);
 
     }
 }

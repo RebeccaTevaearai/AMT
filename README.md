@@ -1,4 +1,14 @@
-# AMT
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/RebeccaTevaearai/AMT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/RebeccaTevaearai/AMT/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/RebeccaTevaearai/AMT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/RebeccaTevaearai/AMT/context:javascript)
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/RebeccaTevaearai/AMT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/RebeccaTevaearai/AMT/context:java)
+
+# AMT 2021-22
+## Introduction <br/>
+ToDo introduction
+
+<img alt="app img" src="images/app.png" height="400" />
+
+<br/>
 
 ## Backlog
 https://cloud.icescrum.com/p/PECHEUR/#/backlog/all/story/
@@ -35,10 +45,34 @@ Modifier le fichier `<path>/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml` <
 - Console admin: localhost:8080/manager/html
   - login: admin:admin  
 
+<br/>
+
 ### Bases de donnée
 MariaDB (https://mariadb.org/download)
 
-Le fichier sql de la base de donnée est sql/DB.sql
+Le fichier sql de la base de donnée est sql/DB.sql <br/>
 
+<br/>
+
+### Javadoc  <br/>
+Génération de la javadoc: <br/>
+`mvn javadoc:javadoc` <br/>
+Le dossier se trouve dans `/target/site/apidocs`
+
+<br/>
+
+### Code coverage <br/>
+génération du rapport de code coverage (jacoco) <br/>
+`mvn jacoco:report` <br/>
+Le rapport se trouve dans `/target/site/apidocs/jacoco` <br/>
+
+<br/>
+
+## MicroService Authentification
+
+https://github.com/RebeccaTevaearai/AuthService
+
+<br/>
+ 
 ## MCD
 <img src="images/MCD.png" height="200" />

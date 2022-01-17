@@ -17,8 +17,7 @@ public class AccountQueries {
             ResultSet resultSet = DatabaseConnection.doQuery("SELECT * FROM `Account` WHERE `id` = ?",
                     new ArrayList<String>() {{ add(id.toString()); }});
 
-            resultSet.next();
-            if(resultSet != null)
+            if(resultSet.next())
                 account = new Account(resultSet.getLong("id"),resultSet.getString("email"),
                         resultSet.getString("role"));
             else{
@@ -34,7 +33,6 @@ public class AccountQueries {
 
     public boolean createAccount(Long id, String email, String role)
     {
-        Account account = null;
         try {
             DatabaseConnection.doQueryUpdate("INSERT INTO `Account` (`id`, `email`, `role`) VALUES (?, ?, ?);",
                     new ArrayList<String>() {{ add(id.toString()); add(email); add(role); }});

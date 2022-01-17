@@ -1,4 +1,5 @@
 <%@ page import="service.CartService" %>
+<%@ page import="service.AuthorizationService" %>
 <head>
     <title>PECHEUR</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -20,17 +21,22 @@
         <!-- Cart -->
         <div id="cart"> <a href="<%=application.getContextPath() %>/cart" class="cart-link">Votre panier</a>
             <div class="cl">&nbsp;</div>
-            <% CartService cartService = (CartService) request.getAttribute("cartService");%>
+            <%
+                HttpSession s = request.getSession();
+                AuthorizationService.initSession(s);
+                CartService cartService = (CartService) s.getAttribute("cartService");%>
             <span>Articles: <strong><%=cartService.articlesQuantity()%></strong></span> &nbsp;&nbsp; <span>Cost: <strong><%=cartService.total()%> CHF</strong></span> </div>
         <!-- End Cart -->
         <!-- Navigation -->
         <div id="navigation">
             <ul>
-                <li><a href="<%=application.getContextPath() %>">Home</a></li>
-                <li><a href="<%=application.getContextPath() %>/login">Login</a></li>
+                <li><a href="<%=application.getContextPath() %>/home">Home</a></li>
+                <li><a href="<%=application.getContextPath() %>/loginpage">Login</a></li>
                 <li><a href="<%=application.getContextPath() %>/account">My Account</a></li>
-                <li><a href="<%=application.getContextPath() %>/test">The Test</a></li>
-                <li><a href="#">Contact</a></li>
+                <% if(cartService.getAccount() != null && cartService.getAccount().getRole().equals("admin")){%>
+                    <li><a href="<%=application.getContextPath() %>/categories">Gestion des categories</a></li>
+                    <li><a href="<%=application.getContextPath() %>/management">Admin page</a></li>
+                <%}%>
             </ul>
         </div>
         <!-- End Navigation -->

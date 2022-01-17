@@ -90,4 +90,29 @@ public class ArticleQueries implements ArticleInterface{
 
         return articles;
     }
+
+    /**
+     * add a Category to an article
+     * @param idArticle Article's id
+     * @param idCategory Category's id
+     * @return Articles list
+     */
+    public boolean addCategoryToArticle(Long idArticle, Long idCategory)
+    {
+        try {
+            DatabaseConnection.doQueryUpdate("INSERT INTO `isDefineBy` " +
+                    "(`id_Article`, `id_Category`) VALUES (?, ?);",
+                    new ArrayList<>()
+                    {{
+                        add(idArticle.toString());
+                        add(idCategory.toString());
+                    }}
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

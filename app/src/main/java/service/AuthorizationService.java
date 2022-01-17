@@ -35,18 +35,18 @@ public class AuthorizationService {
         session.setAttribute("cartService", new CartService(new ArrayList<>()));
     }
 
+    /*
     static public Jws<Claims> parseJWT(String token) {
         String secret = "2jXSDPoSuJmhXLBhhoYZgxHmonoeOOg40zdpnVMkCGI=";
 
         Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
                 SignatureAlgorithm.HS256.getJcaName());
 
-        Jws<Claims> jwt = Jwts.parser()
+        return Jwts.parser()
                 .setSigningKey(hmacKey)
                 .parseClaimsJws(token);
-
-        return jwt;
     }
+     */
 
     static public Boolean isUserAllowed(String ressource, String token) throws Exception {
         String authorizationURL = "http://localhost:8181/session/authorization";
