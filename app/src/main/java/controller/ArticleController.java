@@ -47,7 +47,7 @@ public class ArticleController extends HttpServlet {
         ArticleQueries articleQueries = new ArticleQueries();
         CategoryQueries cm = new CategoryQueries();
 
-        ArrayList<Category> categories = cm.getAllCategory();
+        ArrayList<Category> categories = cm.getAllCategoryWhoGotAnArticle();
         String filter = req.getParameter("category");
         ArrayList<Category> categoriesFilter = new ArrayList<>();
         if(filter != null) {

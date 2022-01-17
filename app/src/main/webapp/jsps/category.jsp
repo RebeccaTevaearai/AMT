@@ -7,6 +7,7 @@
 --%>
 <%@include file="header.jsp"%>
 <% Category category = (Category) request.getAttribute("category");%>
+<h1>Categorie</h1>
 <form action="<%=application.getContextPath() %>/categories/<% if(category != null){ %><%=category.getId()%><% } %>" method="post">
     <% if(category != null){ %>
     <input name="id" value="<%=category.getId()%>" hidden>
@@ -16,8 +17,8 @@
     <button class="button" type="submit">Enregister</button>
 </form>
 <% if(category != null){ %>
-<form action="<%=application.getContextPath() %>/categories/<%=category.getId()%>/delete" method="post">
-    <button class="button" type="button" >Supprimer</button>
+<form action="<%=application.getContextPath() %>/categories/delete/<%=category.getId()%>" method="post">
+    <button class="button" type="submit" >Supprimer</button>
 </form>
 <% } %>
 

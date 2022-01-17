@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(name = "AdminCategoryDeleteServlet", value = "/categories/*/delete")
+@WebServlet(name = "AdminCategoryDeleteServlet", value = "/categories/delete/*")
 public class AdminCategoryDeleteController extends HttpServlet {
 
     @Override

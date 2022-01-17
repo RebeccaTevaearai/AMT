@@ -34,6 +34,23 @@ public class CategoryQueries implements CategoryInterface {
         return categories;
     }
 
+    public ArrayList<Category> getAllCategoryWhoGotAnArticle() {
+        Category category = null;
+        ArrayList<Category> categories = new ArrayList<>();
+        try {
+            ResultSet resultSet = DatabaseConnection.doQuery("SELECT DISTINCT id,name FROM `isDefineBy` " +
+                    "INNER JOIN `Category` ON `isDefineBy`.`id_Category` = `Category`.`id`", new ArrayList<>());
+
+            while (resultSet.next()){
+                category = new Category(resultSet.getLong("id"), resultSet.getString("name"));
+                categories.add(category);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return categories;
+    }
+
     /**
      * Get category by name
      * @param name Category name
@@ -127,7 +144,7 @@ public class CategoryQueries implements CategoryInterface {
     {
         try {
             DatabaseConnection.doQueryUpdate("UPDATE `Category` SET `name`=? WHERE id=?;",
-                    new ArrayList<String>() {{ add(id.toString()); add(name); }});
+                    new ArrayList<String>() {{ add(name); add(id.toString()); }});
 
         }catch (Exception e)
         {
