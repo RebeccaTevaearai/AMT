@@ -30,7 +30,7 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        req.getRequestDispatcher("./jsps/cart.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/jsps/cart.jsp").forward(req,resp);
     }
 
     /**

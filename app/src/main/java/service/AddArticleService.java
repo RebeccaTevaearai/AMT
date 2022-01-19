@@ -108,6 +108,11 @@ public class AddArticleService {
         }
     }
 
+    public static boolean addCategoryToArticle(Long idArticle, Long idCategory)
+    {
+        return new ArticleQueries().addCategoryToArticle(idArticle,idCategory);
+    }
+
     // https://docs.oracle.com/javaee/6/tutorial/doc/glraq.html
     public static String getFileName(final Part part) {
         for (String content : part.getHeader("content-disposition").split(";")) {
@@ -121,7 +126,7 @@ public class AddArticleService {
 
     static public void addImage(String path, long articleId) throws Exception {
         try {
-            String sql = "INSERT INTO `Image` (path, articleId) values (?, ?)";
+            String sql = "INSERT INTO `Image` (path, id_Article) values (?, ?)";
 
             PreparedStatement st = DatabaseConnection.getConnection().prepareStatement(sql);
             st.setString(1, path);

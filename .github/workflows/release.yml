@@ -39,7 +39,7 @@ jobs:
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
       - name: Update vernum footer
         run: |
-          sed -i 's/AMT v.* /AMT ${{ steps.semver.outputs.tag }} /' app/src/main/webapp/jsps/footer.jsp
+          sed -i 's/AMT v.* /AMT ${{ steps.semver.outputs.tag }} /' app/src/main/webapp/WEB-INF/jsps/footer.jsp
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -59,11 +59,11 @@ jobs:
           mvn javadoc:javadoc
       # mvn site -> public
       
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
-        with:
-          branch: main # The branch the action should deploy to.
-          folder:  app/target/site/apidocs # The folder the action should deploy.
+ #     - name: Deploy 🚀
+  #      uses: JamesIves/github-pages-deploy-action@v4.2.2
+   #     with:
+    #      branch: javadoc # The branch the action should deploy to.
+     #     folder:  app/target/site/apidocs # The folder the action should deploy.
      
       # RENAME APP
       - name: rename war

@@ -25,6 +25,6 @@ public class CheckoutController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("./jsps/checkout.jsp").forward(req,resp);
+        req.getRequestDispatcher("WEB-INF/jsps/checkout.jsp").forward(req,resp);
     }
 }
