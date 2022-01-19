@@ -1,15 +1,12 @@
 package controller;
 
-import service.AddArticleService;
-import service.AuthorizationService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
 
 @WebServlet (name="articleImageServlet", value="/articleImage")
-public class articleImageController extends HttpServlet {
+public class AdminArticleImageController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {

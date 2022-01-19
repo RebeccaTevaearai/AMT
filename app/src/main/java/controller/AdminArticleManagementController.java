@@ -1,7 +1,6 @@
 package controller;
 
 import service.AddArticleService;
-import service.AuthorizationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet (name="ArticleManagementServlet", value="/articleManagement")
-public class ArticleManagementController extends HttpServlet {
+public class AdminArticleManagementController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
