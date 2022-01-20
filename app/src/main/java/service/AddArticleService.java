@@ -124,18 +124,4 @@ public class AddArticleService {
         return null;
     }
 
-    static public void addImage(String path, long articleId) throws Exception {
-        try {
-            String sql = "INSERT INTO `Image` (path, id_Article) values (?, ?)";
-
-            PreparedStatement st = DatabaseConnection.getConnection().prepareStatement(sql);
-            st.setString(1, path);
-            st.setString(2, String.valueOf(articleId));
-
-            st.executeUpdate();
-
-        } catch(Exception e) {
-            throw new Exception();
-        }
-    }
 }

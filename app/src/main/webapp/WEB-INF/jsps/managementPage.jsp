@@ -25,8 +25,16 @@
 <h2>Add an Image to an Article</h2>
 <br>
 <form class="formulaire" enctype="multipart/form-data" action="${pageContext.request.contextPath}/articleImage" method="POST">
+
     <label>Article id</label><br>
     <input type="text" name="id"><br>
+    <!--
+<label>Image type</label> <br>
+<input type="radio" id="big" name="type" value="big">
+<label for="big">big</label><br>
+<input type="radio" id="small" name="type" value="small">
+<label for="small">small</label><br>
+-->
     <label>Image</label> <br>
     <input type="file" name="image"> <br><br>
     <input type="submit" value="Submit">

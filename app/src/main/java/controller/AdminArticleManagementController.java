@@ -50,6 +50,15 @@ public class AdminArticleManagementController extends HttpServlet {
                     //ajouter dans la db
                     try {
                         AddArticleService.addArticle(name, description, price, quantity);
+
+                        if (quantity.equals("0")) {
+                            // ajouter image watermark indisponible
+                        }
+
+                        if (price.equals("0")) {
+                            // ajouter watermark preview
+                        }
+
                     } catch(Exception e) {
                         req.setAttribute("msg", "error: could not insert into database");
                         req.getRequestDispatcher("/management").forward(req, resp);
@@ -68,9 +77,7 @@ public class AdminArticleManagementController extends HttpServlet {
                 req.setAttribute("msg", "error: access denied");
                 req.getRequestDispatcher("/").forward(req, resp);
             }
-
  */
-
         } catch (Exception e) {
             req.setAttribute("msg", "error: token not valid");
             req.getRequestDispatcher("/home").forward(req, resp);
