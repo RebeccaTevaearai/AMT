@@ -113,15 +113,5 @@ public class AddArticleService {
         return new ArticleQueries().addCategoryToArticle(idArticle,idCategory);
     }
 
-    // https://docs.oracle.com/javaee/6/tutorial/doc/glraq.html
-    public static String getFileName(final Part part) {
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(
-                        content.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-        return null;
-    }
 
 }

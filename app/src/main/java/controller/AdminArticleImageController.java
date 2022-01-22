@@ -36,8 +36,8 @@ public class AdminArticleImageController extends HttpServlet {
                     session.getAttribute("jwt").toString())) {
  */
 
-        //ServletOutputStream os = resp.getOutputStream();
-        String path = "/home/tevaearai/Documents/HEIG-VD/BA5/AMT/Projet/AMT/app/src/main/webapp/css/images/big/";
+        //String path = "/home/tevaearai/Documents/HEIG-VD/BA5/AMT/Projet/AMT/app/src/main/webapp/css/images/big/";
+        String path = req.getContextPath() + "webapp/css/images/big/";
         String p = "/big/";
 
         Part filePart = req.getPart("image");

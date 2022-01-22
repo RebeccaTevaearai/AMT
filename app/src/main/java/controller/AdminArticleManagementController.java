@@ -1,6 +1,7 @@
 package controller;
 
 import service.AddArticleService;
+import service.ImageQueries;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,14 +50,15 @@ public class AdminArticleManagementController extends HttpServlet {
 
                     //ajouter dans la db
                     try {
-                        AddArticleService.addArticle(name, description, price, quantity);
-
-                        if (quantity.equals("0")) {
-                            // ajouter image watermark indisponible
-                        }
+                        Long id = AddArticleService.addArticle(name, description, price, quantity);
 
                         if (price.equals("0")) {
                             // ajouter watermark preview
+                            ImageQueries.addImageToArticle(id, "/big/preview.jpg");
+
+                        } else if (quantity.equals("0")) {
+                            // ajouter image watermark indisponible
+                            ImageQueries.addImageToArticle(id, "/big/indisponible.jpg");
                         }
 
                     } catch(Exception e) {

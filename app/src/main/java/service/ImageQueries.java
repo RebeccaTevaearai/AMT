@@ -42,30 +42,6 @@ public class ImageQueries implements ImageInterface {
         return images;
     }
 
-    static public String addImagetoPath(String file, String imageName, String imageType) throws Exception {
-
-        //String path = "./webapp/css/images/" + imageType + "/" + imageName;
-        String path = "/" + imageType + "/" + imageName + ".jpg";
-        try {
-            File f = new File(path);
-            FileOutputStream fos = new FileOutputStream(f);
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-
-            //convert string to byte array
-            byte[] bytes = file.getBytes();
-            //write byte array to file
-            bos.write(bytes);
-            bos.close();
-            fos.close();
-
-        } catch (IOException e) {
-            throw new Exception(e);
-        }
-
-        return path;
-
-    }
-
     /**
      * @param idArticle : the id of the Article to whom the file will be associate
      * @param imagePath : the complete path of the image (must exit)
@@ -85,11 +61,5 @@ public class ImageQueries implements ImageInterface {
         } catch (Exception e) {
             throw new Exception();
         }
-    }
-
-    static public void addImage(Long idArticle, String file, String fileType) throws Exception {
-        String imageName = fileType + idArticle;
-        String path = addImagetoPath(file, imageName, fileType);
-        addImageToArticle(idArticle, path);
     }
 }
