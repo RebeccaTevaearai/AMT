@@ -49,7 +49,7 @@ CREATE TABLE isDefineBy(
    id_Category INT,
    PRIMARY KEY(id_Article, id_Category),
    FOREIGN KEY(id_Article) REFERENCES Article(id),
-   FOREIGN KEY(id_Category) REFERENCES Category(id)
+   FOREIGN KEY(id_Category) REFERENCES Category(id) ON DELETE CASCADE
 );
 
 ALTER TABLE `Account`;
