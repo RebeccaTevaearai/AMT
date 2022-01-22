@@ -111,29 +111,4 @@ public class AddArticleService {
     {
         return new ArticleQueries().addCategoryToArticle(idArticle,idCategory);
     }
-
-    // https://docs.oracle.com/javaee/6/tutorial/doc/glraq.html
-    public static String getFileName(final Part part) {
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(
-                        content.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-        return null;
-    }
-
-    static public void addImage(String path, long articleId) throws Exception {
-        try {
-            String sql = "INSERT INTO `Image` (path, id_Article) values (?, ?)";
-
-            DatabaseConnection.doQueryUpdate(sql,new ArrayList<>(){{
-                add(path);
-                add(String.valueOf(articleId));
-            }});
-
-        } catch(Exception e) {
-            throw new Exception();
-        }
-    }
 }
