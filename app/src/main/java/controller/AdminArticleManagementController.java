@@ -55,7 +55,6 @@ public class AdminArticleManagementController extends HttpServlet {
                         req.getRequestDispatcher("/management").forward(req, resp);
                     }
 
-                    //retourner un message de confirmation
                     req.setAttribute("msg", "success: Article added");
                     req.getRequestDispatcher("/management").forward(req, resp);
 
