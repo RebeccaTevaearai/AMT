@@ -82,13 +82,12 @@ public class AddArticleService {
         try {
             String sql = "INSERT INTO `Article` (name, description, quantity, price) values (?, ?, ?, ?)";
 
-            PreparedStatement st = DatabaseConnection.getConnection().prepareStatement(sql);
-            st.setString(1, name);
-            st.setString(2, description);
-            st.setString(3, quantity);
-            st.setString(4, price);
-
-            st.executeUpdate();
+            DatabaseConnection.doQueryUpdate(sql, new ArrayList<>() {{
+                add(name);
+                add(description);
+                add(quantity);
+                add(price);
+            }});
 
             ResultSet resultSet = DatabaseConnection.doQuery(
                     "SELECT * FROM `Article` WHERE `description`= ?",
@@ -128,11 +127,10 @@ public class AddArticleService {
         try {
             String sql = "INSERT INTO `Image` (path, id_Article) values (?, ?)";
 
-            PreparedStatement st = DatabaseConnection.getConnection().prepareStatement(sql);
-            st.setString(1, path);
-            st.setString(2, String.valueOf(articleId));
-
-            st.executeUpdate();
+            DatabaseConnection.doQueryUpdate(sql,new ArrayList<>(){{
+                add(path);
+                add(String.valueOf(articleId));
+            }});
 
         } catch(Exception e) {
             throw new Exception();
