@@ -97,15 +97,4 @@ public class AdminCatergoryController extends HttpServlet {
 
         resp.sendRedirect(req.getContextPath() + "/categories");
     }
-
-    private boolean checkAuth(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        try {
-            if () {
-                return true;
-            }
-
-        } catch (Exception e) {}
-        return false;
-    }
 }
