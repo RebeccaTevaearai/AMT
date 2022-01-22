@@ -39,7 +39,7 @@ public class AccountController extends HttpServlet {
     }
 
     /**
-     * Serve the account page if user is connected
+     * Serve the account page if the user is connected
      * @param req Servlet request
      * @param resp Servlet response
      * @throws ServletException

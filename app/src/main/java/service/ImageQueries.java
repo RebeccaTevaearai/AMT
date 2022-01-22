@@ -1,16 +1,9 @@
 package service;
 
 import data.Image;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 
 /**
  * Image related SQL queries

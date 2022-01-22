@@ -25,7 +25,6 @@
 <h2>Add an Image to an Article</h2>
 <br>
 <form class="formulaire" enctype="multipart/form-data" action="${pageContext.request.contextPath}/articleImage" method="POST">
-
     <label>Article id</label><br>
     <input type="number" name="id"><br>
     <label>Image</label> <br>
