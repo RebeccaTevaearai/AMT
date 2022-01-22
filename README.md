@@ -52,6 +52,8 @@ MariaDB (https://mariadb.org/download)
 
 Le fichier sql de la base de donnée est sql/DB.sql <br/>
 
+Il faut modifier les paramêtre de connexion (user, mdp) en haut du fichier app/src/main/java/service/DatabaseConnection.java
+
 <br/>
 
 ### Javadoc  <br/>

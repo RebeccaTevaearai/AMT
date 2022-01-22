@@ -82,13 +82,12 @@ public class AddArticleService {
         try {
             String sql = "INSERT INTO `Article` (name, description, quantity, price) values (?, ?, ?, ?)";
 
-            PreparedStatement st = DatabaseConnection.getConnection().prepareStatement(sql);
-            st.setString(1, name);
-            st.setString(2, description);
-            st.setString(3, quantity);
-            st.setString(4, price);
-
-            st.executeUpdate();
+            DatabaseConnection.doQueryUpdate(sql, new ArrayList<>() {{
+                add(name);
+                add(description);
+                add(quantity);
+                add(price);
+            }});
 
             ResultSet resultSet = DatabaseConnection.doQuery(
                     "SELECT * FROM `Article` WHERE `description`= ?",
@@ -111,31 +110,5 @@ public class AddArticleService {
     public static boolean addCategoryToArticle(Long idArticle, Long idCategory)
     {
         return new ArticleQueries().addCategoryToArticle(idArticle,idCategory);
-    }
-
-    // https://docs.oracle.com/javaee/6/tutorial/doc/glraq.html
-    public static String getFileName(final Part part) {
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(
-                        content.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-        return null;
-    }
-
-    static public void addImage(String path, long articleId) throws Exception {
-        try {
-            String sql = "INSERT INTO `Image` (path, id_Article) values (?, ?)";
-
-            PreparedStatement st = DatabaseConnection.getConnection().prepareStatement(sql);
-            st.setString(1, path);
-            st.setString(2, String.valueOf(articleId));
-
-            st.executeUpdate();
-
-        } catch(Exception e) {
-            throw new Exception();
-        }
     }
 }
