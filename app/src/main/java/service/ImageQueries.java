@@ -52,12 +52,10 @@ public class ImageQueries implements ImageInterface {
 
             String sql = "INSERT INTO `Image` (path, id_Article) values (?, ?)";
 
-            PreparedStatement st = DatabaseConnection.getConnection().prepareStatement(sql);
-            st.setString(1, imagePath);
-            st.setString(2, String.valueOf(idArticle));
-
-            st.executeUpdate();
-
+            DatabaseConnection.doQueryUpdate(sql, new ArrayList<>() {{
+                add(imagePath);
+                add(String.valueOf(idArticle));
+            }});
         } catch (Exception e) {
             throw new Exception();
         }
