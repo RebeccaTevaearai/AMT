@@ -57,7 +57,7 @@ public class AdminArticleImageController extends HttpServlet {
 
         } catch(Exception e) {
 
-            req.setAttribute("msg", "error: didn't work");
+            req.setAttribute("msg", "error: didn't work" + e);
             req.getRequestDispatcher("/management").forward(req, resp);
         }
         req.setAttribute("msg", "error: feature is not implemented (yet)");
