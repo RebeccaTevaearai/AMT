@@ -37,7 +37,7 @@ public class AdminArticleImageController extends HttpServlet {
  */
 
         //String path = "/home/tevaearai/Documents/HEIG-VD/BA5/AMT/Projet/AMT/app/src/main/webapp/css/images/big/";
-        String path = "../webapps" + req.getContextPath() + "/css/images/big/";
+        String path = "/var/lib/tomcat9" + req.getContextPath() + "/css/images/big/";
         String p = "/big/";
 
         Part filePart = req.getPart("image");
