@@ -45,11 +45,17 @@
                 </h4>
                 <p><%= article.getDescription() %></p>
                 <strong class="price"><%= article.getPrice() %> CHF</strong> </div>
+              <% if(!article.getImages().isEmpty()) {%>
+              <% if(!article.getImages().get(0).getPath().equals("/big/indisponible.jpg")
+                      && !article.getImages().get(0).getPath().equals("/big/preview.jpg")){%>
+
                 <form name="addToCartSubmit" method="post" action="<%=application.getContextPath() %>/cart">
                   <input name="id" value="<%=article.getId()%>" hidden>
                   <input name="quantity" value="1" hidden/>
                   <button class="button" type="submit">Ajouter au panier</button>
                 </form>
+              <%}%>
+              <%}%>
             </div>
           </li>
           <% } %>
@@ -64,8 +70,9 @@
     <div id="sidebar">
       <!-- Search -->
       <div class="box search">
-        <h2>Search by <span></span></h2>
+        <h2><span></span></h2>
         <div class="box-content">
+          <!--
           <form action="#" method="post">
             <label>Keyword</label>
             <input type="text" class="field" />
@@ -87,6 +94,7 @@
             <p> <a href="#" class="bul">Advanced search</a><br />
               <a href="#" class="bul">Contact Customer Support</a> </p>
           </form>
+          -->
         </div>
       </div>
       <!-- End Search -->

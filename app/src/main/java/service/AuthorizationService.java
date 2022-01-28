@@ -35,20 +35,8 @@ public class AuthorizationService {
         session.setAttribute("cartService", new CartService(new ArrayList<>()));
     }
 
-    /*
-    static public Jws<Claims> parseJWT(String token) {
-        String secret = "2jXSDPoSuJmhXLBhhoYZgxHmonoeOOg40zdpnVMkCGI=";
 
-        Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secret),
-                SignatureAlgorithm.HS256.getJcaName());
-
-        return Jwts.parser()
-                .setSigningKey(hmacKey)
-                .parseClaimsJws(token);
-    }
-     */
-
-    static public Boolean isUserAllowed(String ressource, String token) throws Exception {
+    static public Boolean isUserAllowed(String ressource, String token) {
         String authorizationURL = "http://localhost:8181/session/authorization";
 
         String request =
@@ -62,14 +50,10 @@ public class AuthorizationService {
             response = HttpService.doPost(request, authorizationURL);
 
         } catch (Exception e){
-            throw new Exception();
+            return false;
         }
 
-        if (Integer.parseInt(response[1]) != 200) {
-            throw new Exception();
-        }
-
-        return true;
+        return Integer.parseInt(response[1]) == 200;
     }
 
 }

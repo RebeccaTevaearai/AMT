@@ -1,6 +1,7 @@
 package controller;
 
 import service.AddArticleService;
+import service.AuthorizationService;
 import service.ImageQueries;
 
 import javax.servlet.ServletException;
@@ -26,19 +27,19 @@ public class AdminArticleManagementController extends HttpServlet {
         HttpSession session = req.getSession();
 
         try {
-            //if (AuthorizationService.isUserAllowed("/articleManagement",
-            //        session.getAttribute("jwt").toString())) {
+            if (AuthorizationService.isUserAllowed("/articleManagement",
+                    session.getAttribute("jwt").toString())) {
 
                 String name = req.getParameter("name");
                 String description = req.getParameter("description");
                 String quantity = req.getParameter("quantity");
                 String price = req.getParameter("price");
 
-                if (quantity == null) {
+                if (quantity == null || quantity.equals("")) {
                     quantity = "0";
                 }
 
-                if (price == null) {
+                if (price == null || price.equals("")) {
                     price = "0";
                 }
 
@@ -73,12 +74,12 @@ public class AdminArticleManagementController extends HttpServlet {
                     req.setAttribute("msg", "error: invalid parameters");
                     req.getRequestDispatcher("/management").forward(req, resp);
                 }
-/*
+
             } else {
                 req.setAttribute("msg", "error: access denied");
                 req.getRequestDispatcher("/").forward(req, resp);
             }
- */
+
         } catch (Exception e) {
             req.setAttribute("msg", "error: token not valid");
             req.getRequestDispatcher("/home").forward(req, resp);
