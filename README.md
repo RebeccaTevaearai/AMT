@@ -4,15 +4,18 @@
 
 # AMT 2021-22
 ## Introduction <br/>
+<br/>
 
-**Admin login**
-username : pecheur
-password : pecheur
-
-Remarque : si le login ne fonctionne pas, vérifier si le microservice est allumé.
+Site de e-commerce fait dans le cadre du cours AMT.
+<br/>
 
 <img alt="app img" src="images/app.png" height="400" />
 
+<br/>
+<br/>
+Compte admin : <br/>
+username : pecheur <br/>
+password : pecheur <br/>
 <br/>
 
 ## Backlog
