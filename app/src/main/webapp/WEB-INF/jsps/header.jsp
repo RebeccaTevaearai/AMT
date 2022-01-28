@@ -17,7 +17,7 @@
 <div class="shell">
     <!-- Header -->
     <div id="header">
-        <h1 id="logo"><a href="#">shoparound</a></h1>
+        <h1 id="logo"><a href="/home">pecheur</a></h1>
         <!-- Cart -->
         <div id="cart"> <a href="<%=application.getContextPath() %>/cart" class="cart-link">Votre panier</a>
             <div class="cl">&nbsp;</div>
@@ -32,10 +32,10 @@
             <ul>
                 <li><a href="<%=application.getContextPath() %>/home">Home</a></li>
                 <li><a href="<%=application.getContextPath() %>/loginpage">Login</a></li>
-                <li><a href="<%=application.getContextPath() %>/account">My Account</a></li>
+                <li><a href="<%=application.getContextPath() %>/account">Account</a></li>
                 <% if(cartService.getAccount() != null && cartService.getAccount().getRole().equals("admin")){%>
-                    <li><a href="<%=application.getContextPath() %>/categories">Gestion des categories</a></li>
-                    <li><a href="<%=application.getContextPath() %>/management">Admin page</a></li>
+                    <li><a href="<%=application.getContextPath() %>/categories">Category management</a></li>
+                    <li><a href="<%=application.getContextPath() %>/management">Article management</a></li>
                 <%}%>
             </ul>
         </div>

@@ -1,7 +1,5 @@
 package service;
 
-import javax.servlet.http.Part;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -54,15 +52,6 @@ public class AddArticleService {
      */
     static public Boolean verifyName(String name) {
         return name != null && name.length() <= 256;
-    }
-
-    /**
-     *
-     * @param image
-     * @return
-     */
-    static public Boolean verifyImage(String image) {
-        return false;
     }
 
     /**

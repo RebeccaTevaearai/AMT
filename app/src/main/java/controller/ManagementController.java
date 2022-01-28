@@ -27,7 +27,6 @@ public class ManagementController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        /*
         try {
             if (AuthorizationService.isUserAllowed("management.jsp", session.getAttribute("jwt").toString())) {
                 req.getRequestDispatcher("WEB-INF/management.jsp").forward(req, resp);
@@ -40,8 +39,5 @@ public class ManagementController extends HttpServlet {
             req.setAttribute("msg", "error: token not valid");
             req.getRequestDispatcher("/").forward(req, resp);
         }
-
-         */
-        req.getRequestDispatcher("WEB-INF/management.jsp").forward(req, resp);
     }
 }

@@ -1,5 +1,6 @@
 <!-- Text Cols -->
 <div class="cols">
+    <!--
     <div class="cl">&nbsp;</div>
     <div class="col">
         <h3 class="ico ico1">Donec imperdiet</h3>
@@ -25,6 +26,7 @@
             imperdiet, metus ac cursus auctor, arcu felis ornare dui.</p>
         <p class="more"><a href="#" class="bul">Lorem ipsum</a></p>
     </div>
+    -->
     <div class="cl">&nbsp;</div>
 </div>
 <!-- End Text Cols -->
