@@ -34,7 +34,7 @@
 <!-- End Side Full -->
 <!-- Footer -->
 <div id="footer">
-    <p class="left"> AMT  </p>
+    <p class="left"> AMT 0.2.0 </p>
     <p class="right"> &copy; 2010 Shop Around. Design by <a href="http://chocotemplates.com">Chocotemplates.com</a> </p>
 </div>
 <!-- End Footer -->
