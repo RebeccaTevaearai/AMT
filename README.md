@@ -4,7 +4,12 @@
 
 # AMT 2021-22
 ## Introduction <br/>
-ToDo introduction
+
+**Admin login**
+username : pecheur
+password : pecheur
+
+Remarque : si le login ne fonctionne pas, vérifier si le microservice est allumé.
 
 <img alt="app img" src="images/app.png" height="400" />
 
