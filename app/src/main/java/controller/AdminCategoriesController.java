@@ -18,25 +18,21 @@ public class AdminCategoriesController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(checkAuth(req)) {
-            ArrayList<Category> categories = new CategoryQueries().getAllCategory();
+        HttpSession session = req.getSession();
+        try {
+            if(AuthorizationService.isUserAllowed("categories.jsp", session.getAttribute("jwt").toString())) {
+                ArrayList<Category> categories = new CategoryQueries().getAllCategory();
 
-            req.setAttribute("categories", categories);
-            req.getRequestDispatcher("WEB-INF/jsps/categories.jsp").forward(req, resp);
-        }else{
+                req.setAttribute("categories", categories);
+                req.getRequestDispatcher("WEB-INF/jsps/categories.jsp").forward(req, resp);
+            }else{
+                req.setAttribute("msg", "error: access denied");
+                resp.sendRedirect(req.getContextPath() + "/home");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             req.setAttribute("msg", "error: access denied");
             resp.sendRedirect(req.getContextPath() + "/home");
         }
     }
-
-    private boolean checkAuth(HttpServletRequest req) {
-        HttpSession session = req.getSession();
-        try {
-            if (AuthorizationService.isUserAllowed("categories.jsp", session.getAttribute("jwt").toString())) {
-                return true;
-            }
-        } catch (Exception e) {}
-        return false;
-    }
-
 }
